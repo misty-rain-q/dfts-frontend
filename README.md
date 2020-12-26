@@ -15,7 +15,7 @@ docker build -t dfts-frontend .
 ### 安装依赖项
 
 ```
-docker run -v "$(pwd):/app" -t --rm install
+docker run -v "$(pwd):/app" -t --rm dfts-frontend install
 ```
 
 ### 编译 + 热重载（开发环境）

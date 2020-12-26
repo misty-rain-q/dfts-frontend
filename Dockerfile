@@ -1,11 +1,9 @@
 FROM node:14
 
 # Configure Yarn to use Taobao NPM mirror
-# RUN yarn config set registry https://registry.npm.taobao.org
+RUN yarn config set registry https://registry.npm.taobao.org
 
 WORKDIR /app
-COPY . .
-RUN yarn install
 ENTRYPOINT ["yarn"]
 CMD ["serve"]
 

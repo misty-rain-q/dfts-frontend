@@ -10,19 +10,19 @@
 docker build -t dfts-frontend .
 ```
 
+在 Windows 平台上，请使用 PowerShell 执行以下命令；如果使用的是命令提示符（cmd）则需要将命令中的 `-v "$(pwd):/app"` 替换为 `-v %cd%:/app`。
+
+### 安装依赖项
+
+```
+docker run -v "$(pwd):/app" -t --rm install
+```
+
 ### 编译 + 热重载（开发环境）
 
-- 使用 Powershell 或 *nix 系统终端
-
-  ```
-  docker run -v "$(pwd):/app" -p 8080:8080 -t --rm dfts-frontend
-  ```
-
-- 使用命令提示符（cmd）
-
-  ```
-  docker run -v %cd%:/app -p 8080:8080 -t --rm dfts-frontend
-  ```
+```
+docker run -v "$(pwd):/app" -p 8080:8080 -t --rm dfts-frontend
+```
 
 ## 传统开发环境
 

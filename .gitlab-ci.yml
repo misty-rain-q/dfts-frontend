@@ -1,0 +1,34 @@
+stages:
+  - install_dependencies
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: install_dependencies
+  tags:
+    - node
+  script:
+    - yarn install
+  only:
+    - merge_requests
+
+lint:
+  stage: test
+  tags:
+    - node
+  script:
+    - yarn lint
+  only:
+    - merge_requests
+
+unit_test:
+  stage: test
+  tags:
+    - node
+  script:
+    - yarn test:unit
+  only:
+    - merge_requests

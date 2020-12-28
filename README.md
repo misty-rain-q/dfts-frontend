@@ -2,4 +2,4 @@
 
 # 前端仓库
 
-使用git checkout develop切换到develop分支
+使用 `git checkout develop` 切换到 `develop` 分支

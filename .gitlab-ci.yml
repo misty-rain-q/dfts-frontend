@@ -1,0 +1,10 @@
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - echo There is no test being run, as currently this branch does not contain code.
+    - echo This is a dummy pipeline to avoid merge requests being blocked.
+  only:
+    - merge_requests

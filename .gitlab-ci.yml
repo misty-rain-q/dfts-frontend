@@ -29,6 +29,6 @@ unit_test:
   tags:
     - node
   script:
-    - yarn test:unit
+    - yarn test:unit --passWithNoTests
   only:
     - merge_requests

@@ -1,5 +1,5 @@
 <template>
-  <div class="download">
+  <div class="downloadButton">
     <a-input-search id="ainput" placeholder="搜索想要的文件id" style="width: 600px" @search="onSearch" />
     &nbsp;
     <a-button type="primary" icon="download" :size="size" @click="turnToDownloadPage">
@@ -13,7 +13,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
-  name: 'Download',
+  name: 'DownloadButton',
   components: {
   },
   methods: {

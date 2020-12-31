@@ -3,24 +3,24 @@
     <img class="logo" src="../assets/pageLogo.png" alt="">
     <br/>
     <br/>
-    <download></download>
+    <downloadButton></downloadButton>
     <br/>
     <br/>
-    <upload></upload>
+    <uploadButton></uploadButton>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
-import Download from '@/components/Download.vue';
-import Upload from '@/components/Upload.vue';
+import DownloadButton from '@/components/DownloadButton.vue';
+import UploadButton from '@/components/UploadButton.vue';
 
 export default {
   name: 'Home',
   components: {
-    Download,
-    Upload,
+    DownloadButton,
+    UploadButton,
   },
 };
 </script>

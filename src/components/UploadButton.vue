@@ -1,5 +1,5 @@
 <template>
-  <div class="upload">
+  <div class="uploadButton">
     <a-button @click="turnToUploadPage" type="primary" icon="upload" :size="size">
       上传
     </a-button>
@@ -11,7 +11,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
-  name: 'Upload',
+  name: 'UploadButton',
   components: {
   },
   methods: {

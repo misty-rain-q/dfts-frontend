@@ -28,7 +28,7 @@ export default {
   methods: {
     turnToUploadPage() {
       this.visible = true;
-      console.log('UploadPage');
+      // console.log('UploadPage');
     },
     handleOk() {
       this.visible = false;

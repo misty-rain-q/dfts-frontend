@@ -1,6 +1,6 @@
 <template>
   <div class="uploadButton">
-    <a-button @click="turnToUploadPage" type="primary" icon="upload" :size="size">
+    <a-button @click="turnToUploadPage" type="primary" icon="upload">
       上传
     </a-button>
     <a-modal ok-text="上传" cancel-text="取消"

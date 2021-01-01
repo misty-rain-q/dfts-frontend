@@ -1,49 +1,50 @@
 <template>
     <div class="uploadwindow">
-        <UploadWord></UploadWord>
+        <!-- <UploadWord></UploadWord> -->
 
-        <div id="flexbox1">
-        <UploadList></UploadList>
-        <DragUpload></DragUpload>
-        <div id="flexbox2">
-        <SetFile></SetFile>
-        </div >
+        <div class="left">
+          <UploadList></UploadList>
         </div>
-        <CancelAndUpload></CancelAndUpload>
+
+        <div class="right">
+          <!-- <click-upload></click-upload> -->
+          <DragUpload></DragUpload>
+          <SetFile></SetFile>
+        </div>
+
+        <!-- <CancelAndUpload></CancelAndUpload> -->
 
     </div>
 </template>
 
 <script>
-import UploadWord from '@/components/UploadWord.vue';
 import UploadList from '@/components/UploadList.vue';
 import DragUpload from '@/components/DragUpload.vue';
 import SetFile from '@/components/SetFile.vue';
-import CancelAndUpload from '@/components/CancelAndUpload.vue';
+// import CancelAndUpload from '@/components/CancelAndUpload.vue';
 
 export default {
   name: 'UploadWindow',
 
   components: {
-    UploadWord,
     UploadList,
     DragUpload,
     SetFile,
-    CancelAndUpload,
   },
 
 };
 </script>
 
 <style scoped>
-
-#flexbox1{
-    display: flex;
+.uploadwindow {
+  display: flex;
+  height: 300px;
+  /* background-color: red; */
 }
 
-#flexbox2{
-    display:flex;
-    flex-direction: row;
+.left {
+  width: 80%;
+  margin-right: 10px;
 }
 
 </style>

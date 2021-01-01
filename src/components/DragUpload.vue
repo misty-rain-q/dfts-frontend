@@ -8,27 +8,28 @@
 </template>
 <style scoped>
     .dragupload{
-        border: solid silver;
-        height: 200;
-        width:400;
-        position: absolute;
+        border: 1px solid silver;
+        text-align: center;
+        /* height: 200; */
+        /* width:400; */
+        /* position: absolute;
         top: 15%;
-        right:5%;
+        right:5%; */
 
     }
 
     .file{
-        margin-top: 10px;
-        width: 25%;
+        width: 10%;;
     }
 
     #sentence1{
-        font-size: 20px;
+        font-size: 16px;
 
     }
 
     #sentence2{
         color: dashed silver;
+        font-size: 12px;
     }
 
 </style>

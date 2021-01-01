@@ -1,57 +1,69 @@
 <template>
     <div id="SetFile">
-         <button id="selectfile">选择文件</button>
-         <br>
-        添加提取码：<input type="text" id="extraction" value="不添加则不填写"
-        onfocus="if(value=='不添加则不填写')value=''" onblur="if(!value)value='不添加则不填写'" name="keyword" >
+         <!-- <button id="selectfile">选择文件</button> -->
+      <br>
+      <div class="extraction">
+        添加提取码：
+        <a-input-password placeholder="不添加则不写" />
+      </div>
+
         <br>
-        有效日期：&nbsp;&nbsp;<input type="text" id="date" value="1"/>
-        <input type="button" v-on:click="adddate" value="+">
-        <input type="button" v-on:click="subdate" value="-">天
+        <div>
+          <span>有效日期：&nbsp;&nbsp;</span>
+          <a-select class="date" default-value="forever"
+            style="width: 120px" @change="handleChange">
+            <a-select-option value="forever">
+              永久
+            </a-select-option>
+            <a-select-option value="month">
+              1个月
+            </a-select-option>
+            <a-select-option value="week">
+              1星期
+            </a-select-option>
+            <a-select-option value="day">
+              1天
+            </a-select-option>
+            <a-select-option value="hour">
+              1小时
+            </a-select-option>
+          </a-select>
+        </div>
+
         <br>
-        下载次数：&nbsp;&nbsp;<input type="text" id="downloadtime" value="1"/>
-        <input type="button" v-on:click="addtime" value="+">
-        <input type="button" v-on:click="subtime" value="-">次
+        <span>可下载次数：&nbsp;&nbsp;</span>
+        <a-select class="counter" default-value="max"
+         style="width: 90px" @change="downloadCountChange">
+          <a-select-option value="max">
+            无限次
+          </a-select-option>
+          <a-select-option value="number">
+            有限次
+          </a-select-option>
+        </a-select>
+        <a-input-number :disabled="disabled" id="inputNumber" :min="1" @change="onChange" />
 
     </div>
 </template>
 
 <script>
 export default {
+  name: 'SetFile',
+  data() {
+    return {
+      disabled: true,
+    };
+  },
   methods: {
-    adddate() {
-      const txt = document.getElementById('date');
-      let a = txt.value;
-      a += 1;
-      txt.value = a;
+    handleChange() {
+      console.log('handleChange');
     },
-    subdate() {
-      const txt = document.getElementById('date');
-      let a = txt.value;
-      if (a > 1) {
-        a -= 1;
-        txt.value = a;
-      } else {
-        txt.value = 1;
-      }
+    onChange(value) {
+      console.log('changed', value);
     },
-
-    addtime() {
-      const txt = document.getElementById('downloadtime');
-      let a = txt.value;
-      a += 1;
-      txt.value = a;
-    },
-
-    subtime() {
-      const txt = document.getElementById('downloadtime');
-      let a = txt.value;
-      if (a > 1) {
-        a -= 1;
-        txt.value = a;
-      } else {
-        txt.value = 1;
-      }
+    downloadCountChange() {
+      this.disabled = !this.disabled;
+      console.log(this.disabled);
     },
   },
 };
@@ -60,8 +72,8 @@ export default {
 
 <style scoped>
 #SetFile{
-    text-align: left;
-    position: absolute;
+    /* text-align: left;
+    position: absolute; */
     bottom: 20%;
     right:13%;
 
@@ -75,12 +87,12 @@ export default {
 
 }
 
-#extraction{
-
+.counter {
+  margin-right: 10px;
 }
 
-#date{
-    margin-top:20px;
+.extraction .ant-input-password {
+  width: 180px;
 }
 
 #downloadtime{

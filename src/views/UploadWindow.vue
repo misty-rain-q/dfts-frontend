@@ -3,12 +3,16 @@
         <!-- <UploadWord></UploadWord> -->
 
         <div class="left">
-          <UploadList></UploadList>
+          <UploadList
+          :default-file-list="currentFileList"
+          ></UploadList>
         </div>
 
         <div class="right">
           <!-- <click-upload></click-upload> -->
-          <DragUpload></DragUpload>
+          <ClickUpload
+          @filelist-changed="fileListChanged"
+          ></ClickUpload>
           <SetFile></SetFile>
         </div>
 
@@ -19,16 +23,26 @@
 
 <script>
 import UploadList from '@/components/UploadList.vue';
-import DragUpload from '@/components/DragUpload.vue';
+import ClickUpload from '@/components/ClickUpload.vue';
 import SetFile from '@/components/SetFile.vue';
 // import CancelAndUpload from '@/components/CancelAndUpload.vue';
 
 export default {
   name: 'UploadWindow',
+  data() {
+    return {
+      currentFileList: [],
+    };
+  },
+  methods: {
+    fileListChanged(val) {
+      this.currentFileList = val;
+    },
+  },
 
   components: {
     UploadList,
-    DragUpload,
+    ClickUpload,
     SetFile,
   },
 

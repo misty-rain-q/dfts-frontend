@@ -11,11 +11,10 @@
       <img class="file-icon" src="../assets/file.png" alt="">
     </p>
     <p class="upload-text">
-      Click or drag file to this area to upload
+      点击或将文件拖拽到这里上传
     </p>
     <p class="upload-hint">
-      Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-      band files
+      支持扩展名：.rar .zip .doc .docx .pdf .jpg
     </p>
   </a-upload-dragger>
   </div>

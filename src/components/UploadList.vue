@@ -1,6 +1,6 @@
 <template>
     <div id="iploadlist">
-      <a-upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      <a-upload class="drag-upload-list" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         :file-list="defaultFileList"
         @change="handleChange">
         <!-- <a-button> <a-icon type="upload" /> Upload </a-button> -->
@@ -40,5 +40,9 @@ export default {
     background: lightblue;
     border: 1px solid solid silver;
 
+}
+
+.drag-upload-list >>> .ant-upload-list-item {
+  width: 179px;
 }
 </style>

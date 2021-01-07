@@ -4,10 +4,10 @@
       上传
     </a-button>
     <a-modal
-    @click="uploadToGundb"
+    @ok="uploadToGundb"
 
     ok-text="上传" cancel-text="取消"
-     :maskClosable= "false" v-model="visible" title="上传" @ok="handleOk">
+     :maskClosable= "false" v-model="visible" title="上传">
       <upload-window
       @changeExtractionCode = "changeCode"
       @changeEffectiveDate = 'changeDate'
@@ -115,7 +115,8 @@ export default {
 
     uploadToGundb(){
       const tempThis = this;
-      let uid = uuid(8,16)
+      let uid = this.uuid(8,16)
+      window.gun = tempThis.$gun
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total').put(this.fileNum)
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
       .put(this.extractionCode)
@@ -126,10 +127,12 @@ export default {
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset').put(this.downset)
 
       for(var i = 0;i<this.fileNum;i++){
-        let fileUid = uuid(8,16)
+        let fileUid = this.uuid(8,16)
         tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files').put(fileUid)
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-        .get(fileuid).put(this.getBase64(this.fileList[i]))
+        this.getBase64(this.fileList[i].originFileObj).then(str => {
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+        .get(fileUid).put(str)
+        })
 
       }
 

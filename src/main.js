@@ -37,9 +37,9 @@ Vue.use(VueGun, {
 
   ],
 
-  radisk: true,
+  // radisk: true,
 
-  localStorage: false,
+  // localStorage: false,
 
 });
 

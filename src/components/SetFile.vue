@@ -1,21 +1,43 @@
 <template>
     <div id="SetFile">
-         <!-- <button id="selectfile">选择文件</button> -->
       <br>
       <div class="extraction">
         添加提取码：
-        <a-input-password placeholder="不添加则不写" />
+        <a-input-password placeholder="不添加则不写" v-model="password" />
       </div>
-      <br>
-      <div>
-        <span>有效日期：&nbsp;&nbsp;</span>
-        <a-select class="date" default-value="forever"
-          style="width: 120px" @change="handleChange">
-          <a-select-option value="forever">
-            永久
-          </a-select-option>
-          <a-select-option value="month">
-            1个月
+
+        <br>
+        <div>
+          <span>有效日期：&nbsp;&nbsp;</span>
+          <a-select class="date" default-value="forever"
+            style="width: 120px"
+            @change="handleChange"
+
+            v-model="datelist">
+            <a-select-option value="forever">
+              永久
+            </a-select-option>
+            <a-select-option value="month">
+              1个月
+            </a-select-option>
+            <a-select-option value="week">
+              1星期
+            </a-select-option>
+            <a-select-option value="day">
+              1天
+            </a-select-option>
+            <a-select-option value="hour">
+              1小时
+            </a-select-option>
+          </a-select>
+        </div>
+
+        <br>
+        <span>可下载次数：&nbsp;&nbsp;</span>
+        <a-select class="counter" default-value="max"
+         style="width: 90px" @change="downloadCountChange" v-model="downlist">
+          <a-select-option value="max">
+            无限次
           </a-select-option>
           <a-select-option value="week">
             1星期
@@ -27,20 +49,8 @@
             1小时
           </a-select-option>
         </a-select>
-      </div>
-
-      <br>
-      <span>可下载次数：&nbsp;&nbsp;</span>
-      <a-select class="counter" default-value="max"
-        style="width: 85px" @change="downloadCountChange">
-        <a-select-option value="max">
-          无限次
-        </a-select-option>
-        <a-select-option value="number">
-          有限次
-        </a-select-option>
-      </a-select>
-      <a-input-number :disabled="disabled" id="inputNumber" :min="1" @change="onChange" />
+        <a-input-number :disabled="disabled"
+        id="inputNumber" :min="1" @change="onChange" v-model="downnum" />
 
     </div>
 </template>
@@ -51,8 +61,30 @@ export default {
   data() {
     return {
       disabled: true,
+      password: '',
+      datelist: '',
+      downlist: '',
+      downnum: 0,
+
     };
   },
+
+  watch: {
+    password() {
+      this.$emit('changeECode', this.password);
+    },
+    datelist() {
+      this.$emit('changeEDate', this.datelist);
+    },
+    downlist() {
+      this.$emit('changeDset', this.downlist);
+    },
+    downnum() {
+      this.$emit('changeDTime', this.downnum);
+    },
+
+  },
+
   methods: {
     handleChange() {
       console.log('handleChange');
@@ -64,6 +96,7 @@ export default {
       this.disabled = !this.disabled;
       console.log(this.disabled);
     },
+
   },
 };
 

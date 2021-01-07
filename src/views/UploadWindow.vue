@@ -6,12 +6,27 @@
         ></UploadList>
       </div>
 
-      <div class="right">
-        <ClickUpload
-        @filelist-changed="fileListChanged"
-        ></ClickUpload>
-        <SetFile></SetFile>
-      </div>
+        <div class="left">
+          <UploadList
+          :default-file-list="currentFileList"
+          ></UploadList>
+        </div>
+
+        <div class="right">
+          <!-- <click-upload></click-upload> -->
+          <ClickUpload
+          @filelist-changed="fileListChanged"
+          ></ClickUpload>
+          <SetFile
+          @changeECode = 'cgcode'
+          @changeEDate = 'cgdate'
+          @changeDset = 'cgds'
+          @changeDTime = 'cgdt'
+          @changeExtractionCode="extractionCodeChanged">
+          </SetFile>
+        </div>
+
+        <!-- <CancelAndUpload></CancelAndUpload> -->
 
     </div>
 </template>
@@ -31,9 +46,26 @@ export default {
   methods: {
     fileListChanged(val) {
       this.currentFileList = val;
+      this.$emit('file-list-changed', this.currentFileList);
     },
-  },
+    extractionCodeChanged(val) {
+      this.$emit('changeExtractionCode', val);
+    },
+    // setfile值传递中介
+    cgcode(password) {
+      this.$emit('changeExtractionCode', password);
+    },
+    cgdate(datelist) {
+      this.$emit('changeEffectiveDate', datelist);
+    },
+    cgds(downlist) {
+      this.$emit('changeDownset', downlist);
+    },
+    cgdt(downnum) {
+      this.$emit('changeDownloadTime', downnum);
+    },
 
+  },
   components: {
     UploadList,
     ClickUpload,

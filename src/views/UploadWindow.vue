@@ -6,12 +6,6 @@
         ></UploadList>
       </div>
 
-        <div class="left">
-          <UploadList
-          :default-file-list="currentFileList"
-          ></UploadList>
-        </div>
-
         <div class="right">
           <!-- <click-upload></click-upload> -->
           <ClickUpload

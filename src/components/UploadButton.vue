@@ -3,7 +3,7 @@
     <a-button @click="turnToUploadPage" type="primary" icon="upload">
       上传
     </a-button>
-    <a-modal ok-text="上传" cancel-text="取消"
+    <a-modal ok-text="上传" cancel-text="取消" :centered="true"
      :maskClosable= "false" v-model="visible" title="上传" @ok="handleOk">
       <upload-window></upload-window>
     </a-modal>
@@ -38,5 +38,11 @@ export default {
 </script>
 
 <style scoped>
+/deep/ .ant-modal {
+  width: 40rem !important;
+}
 
+/* /deep/ .ant-modal-content {
+  width: 40rem;
+} */
 </style>

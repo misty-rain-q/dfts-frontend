@@ -51,14 +51,22 @@ export default {
 
 <style scoped>
 .uploadwindow {
-  display: flex;
+  display: grid;
   height: 300px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   /* background-color: red; */
 }
 
 .left {
-  width: 80%;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.right {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 </style>

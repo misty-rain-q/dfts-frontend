@@ -1,6 +1,6 @@
 <template>
   <div class="downloadButton">
-    <a-input-search id="ainput" placeholder="搜索想要的文件id" style="width: 600px" @search="onSearch" />
+    <a-input-search id="ainput" placeholder="搜索想要的文件id" style="width: 35%" @search="onSearch" />
     &nbsp;
     <a-button type="primary" icon="download" @click="turnToDownloadPage">
       下载
@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style scoped>
-
+.ant-input-search {
+  min-width: 200px;
+}
 </style>

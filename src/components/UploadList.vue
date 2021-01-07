@@ -28,21 +28,16 @@ export default {
 
 <style scoped>
 #iploadlist{
-    border:dashed silver;
+    border:1px solid silver;
     height: 100%;
+    width: 280px;
     /* position: relative;
     left:0%;
     top: 20%; */
 
 }
 
-#iploadlist li{
-    background: lightblue;
-    border: 1px solid solid silver;
-
-}
-
 .drag-upload-list >>> .ant-upload-list-item {
-  width: 179px;
+  width: 280px;
 }
 </style>

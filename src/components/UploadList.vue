@@ -31,9 +31,6 @@ export default {
     border:1px solid silver;
     height: 100%;
     width: 280px;
-    /* position: relative;
-    left:0%;
-    top: 20%; */
 
 }
 

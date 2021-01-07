@@ -13,7 +13,6 @@
 <script>
 import UploadWindow from '../views/UploadWindow.vue';
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
   name: 'UploadButton',
@@ -41,8 +40,4 @@ export default {
 /deep/ .ant-modal {
   width: 40rem !important;
 }
-
-/* /deep/ .ant-modal-content {
-  width: 40rem;
-} */
 </style>

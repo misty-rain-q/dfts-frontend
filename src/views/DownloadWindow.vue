@@ -6,12 +6,8 @@
 
         <div class="right">
           <img class="logo" src="../assets/uploadLogo.jpg" alt="">
-          <!-- <click-upload></click-upload> -->
-          <!-- <DragUpload></DragUpload> -->
           <FileInfo class="info"></FileInfo>
         </div>
-
-        <!-- <CancelAndUpload></CancelAndUpload> -->
 
     </div>
 </template>
@@ -19,7 +15,6 @@
 <script>
 import DownloadList from '@/components/DownloadList.vue';
 import FileInfo from '@/components/FileInfo.vue';
-// import CancelAndUpload from '@/components/CancelAndUpload.vue';
 
 export default {
   name: 'DownloadWindow',
@@ -36,7 +31,6 @@ export default {
 .downloadWindow {
   display: flex;
   height: 300px;
-  /* background-color: red; */
 }
 
 .left {

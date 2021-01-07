@@ -78,14 +78,6 @@ export default {
 
 }
 
-#selectfile{
-    margin-bottom: 20px;
-    position: relative;
-    top:0px;
-    left:30%;
-
-}
-
 .counter {
   margin-right: 10px;
 }

@@ -12,7 +12,6 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
 import DownloadButton from '@/components/DownloadButton.vue';
 import UploadButton from '@/components/UploadButton.vue';
 

@@ -16,7 +16,7 @@
       @file-list-changed="handleFileListChange"></upload-window>
     </a-modal>
     <a-modal ok-text="确定" cancel-text="取消" :centered="true"
-     :maskClosable= "false" v-model="linkVisible" title="上传成功" @ok="handleOk">
+     :maskClosable= "false" v-model="linkVisible" title="上传成功" @ok="linkPageHandleOk">
       <link-page></link-page>
     </a-modal>
   </div>
@@ -57,10 +57,8 @@ export default {
       this.visible = true;
       // console.log('UploadPage');
     },
-    handleOk() {
-      console.log(this.fileList);
-      this.visible = false;
-      this.linkVisible = true;
+    linkPageHandleOk() {
+      this.linkVisible = !this.linkVisible;
     },
     handleFileListChange(newFileList) {
       this.fileList = newFileList;
@@ -143,6 +141,8 @@ export default {
         })
 
       }
+      this.visible = !this.visible;
+      this.linkVisible = !this.linkVisible;
 
     }
 

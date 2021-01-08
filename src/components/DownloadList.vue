@@ -1,49 +1,72 @@
 <template>
   <div>
-    <div :style="{ borderBottom: '1px solid silver' }">
-      <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChange">
-        全选
-      </a-checkbox>
-    </div>
-    <br />
-    <div class="file">
-      <a-checkbox-group v-model="checkedList" :options="plainOptions" @change="onChange" />
-    </div>
-
+    <a-table
+      :row-selection="rowSelection"
+      :columns="columns"
+      :data-source="data">
+      <span slot="action">
+        <a @click="handleEdit()">预览</a>
+      </span>
+    </a-table>
   </div>
 </template>
 
 <script>
-const plainOptions = ['文件一', '文件二', '文件三'];
-const defaultCheckedList = ['文件一', '文件二', '文件三'];
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    scopedSlots: { customRender: 'name' },
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    width: '30%',
+    scopedSlots: { customRender: 'action' },
+    align: 'center',
+  },
+];
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+  },
+];
+
 export default {
   data() {
     return {
-      checkedList: defaultCheckedList,
-      indeterminate: true,
-      checkAll: false,
-      plainOptions,
+      data,
+      columns,
     };
   },
-  methods: {
-    onChange(checkedList) {
-      this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
-      this.checkAll = checkedList.length === plainOptions.length;
+  computed: {
+    rowSelection() {
+      return {
+        onChange: (selectedRowKeys, selectedRows) => {
+          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        },
+        getCheckboxProps: (record) => ({
+          props: {
+            disabled: record.name === 'Disabled User',
+            name: record.name,
+          },
+        }),
+      };
     },
-    onCheckAllChange(e) {
-      Object.assign(this, {
-        checkedList: e.target.checked ? plainOptions : [],
-        indeterminate: false,
-        checkAll: e.target.checked,
-      });
+  },
+  methods: {
+    handleEdit() {
+      console.log('1111');
     },
   },
 };
 </script>
 
 <style scoped>
-/deep/ .ant-checkbox-group-item{
-    display: block;
-    margin-bottom: 10px;
-}
+
 </style>

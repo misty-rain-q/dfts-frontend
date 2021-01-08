@@ -26,6 +26,12 @@ docker run -v "$(pwd):/app" -p 8080:8080 -t --rm dfts-frontend
 
 ## 传统开发环境
 
+### 安装yarn
+
+```
+npm install -g yarn
+```
+
 ### 安装依赖项
 
 ```

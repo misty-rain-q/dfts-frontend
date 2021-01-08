@@ -39,14 +39,8 @@
           <a-select-option value="max">
             无限次
           </a-select-option>
-          <a-select-option value="week">
-            1星期
-          </a-select-option>
-          <a-select-option value="day">
-            1天
-          </a-select-option>
-          <a-select-option value="hour">
-            1小时
+          <a-select-option value="number">
+            有限次
           </a-select-option>
         </a-select>
         <a-input-number :disabled="disabled"

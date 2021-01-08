@@ -15,6 +15,10 @@
       @changeDownset = 'changeSet'
       @file-list-changed="handleFileListChange"></upload-window>
     </a-modal>
+    <a-modal ok-text="确定" cancel-text="取消" :centered="true"
+     :maskClosable= "false" v-model="linkVisible" title="上传成功" @ok="handleOk">
+      <link-page></link-page>
+    </a-modal>
   </div>
 </template>
 
@@ -27,12 +31,14 @@
 <script>
 import UploadWindow from '../views/UploadWindow.vue';
 
+import LinkPage from '../views/LinkPage.vue';
 // @ is an alias to /src
 
 export default {
   name: 'UploadButton',
   components: {
     UploadWindow,
+    LinkPage,
   },
   data() {
     return {
@@ -43,6 +49,7 @@ export default {
       effectiveDate:'',
       downloadTime:0,
       downset:'',
+      linkVisible: false,
     };
   },
   methods: {
@@ -53,6 +60,7 @@ export default {
     handleOk() {
       console.log(this.fileList);
       this.visible = false;
+      this.linkVisible = true;
     },
     handleFileListChange(newFileList) {
       this.fileList = newFileList;

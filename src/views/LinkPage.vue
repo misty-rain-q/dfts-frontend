@@ -10,30 +10,60 @@
         />
         <div class="linkAdress">
           <p class="fontLink">文件ID</p>
-          <p class="address">afbe12kjr3422kjf</p>
-          <a-button class="copy" type="primary" icon="copy">复制</a-button>
+          <p class="address">{{fileId}}</p>
+          <a-button class="copy" @click="copyfileid" type="primary" icon="copy">复制</a-button>
         </div>
         <div class="linkAdress">
           <p class="fontLink">复制链接</p>
-          <p class="address">https://www.antdv.com/components/progress-cn/12313213123132132132132</p>
-          <a-button class="copy" type="primary" icon="copy">复制</a-button>
+          <p class="address">{{fileLink}}</p>
+          <a-button class="copy" @click="copyfilelink" type="primary" icon="copy">复制</a-button>
         </div>
         <p class="codeTitle">二维码</p>
-        <div class="code"></div>
+        <div>
+        <vue-qr
+          :size="100"
+          :margin="0"
+          :auto-color="true"
+          :dot-scale="1"
+          :text="fileLink" />
+        </div>
+
     </div>
 </template>
-
 <script>
+
+import VueQr from 'vue-qr';
+import { copy } from 'iclipboard';
+
 export default {
   name: 'LinkPage',
+
+  components: {
+    VueQr,
+  },
+
   data() {
     return {
-
+      fileId: '',
+      fileLink: '',
     };
   },
+
   methods: {
+    copyfileid() {
+      copy(this.fileId);
+    },
+
+    copyfilelink() {
+      copy(this.fileLink);
+    },
 
   },
+
+  created() {
+    window.LinkPageVm = this;
+  },
+
 };
 </script>
 
@@ -72,10 +102,4 @@ export default {
     margin: 5px auto;
 }
 
-.code {
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-    margin: 5px auto;
-}
 </style>

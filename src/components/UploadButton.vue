@@ -142,11 +142,15 @@ export default {
 
       }
       this.visible = !this.visible;
+
       this.linkVisible = !this.linkVisible;
+      window.LinkPageVm.fileId = uid;
+      window.LinkPageVm.fileLink = window.location.origin+"/"+"?"+"fileId="+uid;
 
     }
 
   },
+
 };
 </script>
 

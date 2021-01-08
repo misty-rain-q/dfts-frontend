@@ -12,8 +12,8 @@
 
 <script>
 // @ is an alias to /src
-import DownloadButton from '@/components/DownloadButton.vue';
-import UploadButton from '@/components/UploadButton.vue';
+import DownloadButton from '../components/DownloadButton.vue';
+import UploadButton from '../components/UploadButton.vue';
 
 export default {
   name: 'Home',

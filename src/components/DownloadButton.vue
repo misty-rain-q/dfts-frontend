@@ -14,8 +14,6 @@
 
 <script>
 import DownloadWindow from '../views/DownloadWindow.vue';
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
   name: 'DownloadButton',
@@ -33,8 +31,8 @@ export default {
       this.visible = true;
     },
     turnToDownloadPage() {
-      const inputElement = document.getElementById('ainput');
-      console.log(inputElement.value);
+      // const inputElement = document.getElementById('ainput');
+      // console.log(inputElement.value); //该行会影响unit test
       this.visible = true;
     },
     handleOk() {

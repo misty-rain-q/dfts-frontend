@@ -1,7 +1,8 @@
 <template>
     <div id="iploadlist">
-      <a-upload class="drag-upload-list" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      <a-upload class="drag-upload-list"
         :file-list="defaultFileList"
+        :before-upload="() => false"
         @change="handleChange">
         <!-- <a-button> <a-icon type="upload" /> Upload </a-button> -->
       </a-upload>

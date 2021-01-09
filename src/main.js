@@ -108,3 +108,6 @@ new Vue({
       });
   },
 }).$mount('#app');
+
+// TODO Replace this storage to a more elegant one, e.g. Vuex
+window.storage = {};

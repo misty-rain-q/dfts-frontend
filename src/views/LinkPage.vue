@@ -58,12 +58,23 @@ export default {
       copy(this.fileLink);
     },
 
+    updateFileInformation(fileId, fileLink) {
+      this.fileId = fileId;
+      this.fileLink = fileLink;
+    },
+
   },
 
-  created() {
-    window.LinkPageVm = this;
+  mounted() {
+    this.updateFileInformation(
+      window.storage.currentFile.fileId,
+      window.storage.currentFile.fileLink,
+    );
+    if (window.storage.vm === undefined) {
+      window.storage.vm = {};
+    }
+    window.storage.vm.linkPage = this;
   },
-
 };
 </script>
 

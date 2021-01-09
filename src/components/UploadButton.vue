@@ -144,9 +144,16 @@ export default {
       this.visible = !this.visible;
 
       this.linkVisible = !this.linkVisible;
-      window.LinkPageVm.fileId = uid;
-      window.LinkPageVm.fileLink = window.location.origin+"/"+"?"+"fileId="+uid;
-
+      window.storage.currentFile = {
+        fileId: uid,
+        fileLink: window.location.origin+"/"+"?"+"fileId="+uid,
+      }
+      if (window.storage.vm && window.storage.vm.linkPage) {
+        window.storage.vm.linkPage.updateFileInformation(
+          window.storage.currentFile.fileId,
+          window.storage.currentFile.fileLink
+        );
+      }
     }
 
   },

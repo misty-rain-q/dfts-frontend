@@ -22,12 +22,6 @@
   </div>
 </template>
 
-<script src='https://cdn.jsdelivr.net/npm/gun/gun.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/gun/lib/radix.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/gun/lib/radisk.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/gun/lib/store.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js'></script>
-
 <script>
 import UploadWindow from '../views/UploadWindow.vue';
 
@@ -44,11 +38,10 @@ export default {
     return {
       visible: false,
       fileList: [],
-      fileNum:'0',
-      extractionCode :'',
-      effectiveDate:'',
-      downloadTime:0,
-      downset:'',
+      extractionCode: '',
+      effectiveDate: '',
+      downloadTime: 0,
+      downset: '',
       linkVisible: false,
     };
   },
@@ -62,102 +55,107 @@ export default {
     },
     handleFileListChange(newFileList) {
       this.fileList = newFileList;
-      this.fileNum = newFileList.length;
-
     },
-    changeCode(code){
+    changeCode(code) {
       this.extractionCode = code;
-      console.log(this.extractionCode)
+      console.log(this.extractionCode);
     },
-    changeDate(datelist){
+    changeDate(datelist) {
       this.effectiveDate = datelist;
-      console.log(this.effectiveDate)
+      console.log(this.effectiveDate);
     },
-    changeTime(downnum){
+    changeTime(downnum) {
       this.downloadTime = downnum;
-      console.log(this.downloadTime)
+      console.log(this.downloadTime);
     },
-    changeSet(downlist){
+    changeSet(downlist) {
       this.downset = downlist;
-      console.log(this.downset)
+      console.log(this.downset);
     },
     uuid(len, radix) {
-    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-    var uuid = [], i;
-    radix = radix || chars.length;
-    if (len) {
-      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
-    } else {
-      var r;
-      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-      uuid[14] = '4';
-      for (i = 0; i < 36; i++) {
-        if (!uuid[i]) {
-          r = 0 | Math.random()*16;
-          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+      const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+      const uuid = []; let
+        i;
+      const adoptedRadix = radix || chars.length;
+      if (len) {
+        for (i = 0; i < len; i += 1) uuid[i] = chars[Math.floor(Math.random() * adoptedRadix)];
+      } else {
+        let r;
+        uuid[8] = '-';
+        uuid[13] = '-';
+        uuid[18] = '-';
+        uuid[23] = '-';
+        uuid[14] = '4';
+        for (i = 0; i < 36; i += 1) {
+          if (!uuid[i]) {
+            r = Math.floor(Math.random() * 16);
+            // eslint-disable-next-line no-bitwise
+            uuid[i] = chars[(i === 19) ? (r & 0x3) | 0x8 : r];
+          }
         }
       }
-    }
 
-    return uuid.join('');
-},
-
-      getBase64 (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        let fileResult = ''
-        reader.readAsDataURL(file)
-        reader.onload = function () {
-          fileResult = reader.result
-        }
-        reader.onerror = function (error) {
-          reject(error)
-        }
-        reader.onloadend = function () {
-          resolve(fileResult)
-        }
-      })
+      return uuid.join('');
     },
 
-    uploadToGundb(){
+    getBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        let fileResult = '';
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          fileResult = reader.result;
+        };
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        reader.onloadend = () => {
+          resolve(fileResult);
+        };
+      });
+    },
+
+    uploadToGundb() {
       const tempThis = this;
-      let uid = this.uuid(8,16)
-      window.gun = tempThis.$gun
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total').put(this.fileNum)
+      const fileNum = this.fileList.length;
+      const uid = this.uuid(8, 16);
+      window.gun = tempThis.$gun;
+      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
+        .put(fileNum);
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
-      .put(this.extractionCode)
+        .put(this.extractionCode);
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('effectiveDate')
-      .put(this.effectiveDate)
+        .put(this.effectiveDate);
       tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downloadTime')
-      .put(this.downloadTime)
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset').put(this.downset)
+        .put(this.downloadTime);
+      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
+        .put(this.downset);
 
-      for(var i = 0;i<this.fileNum;i++){
-        let fileUid = this.uuid(8,16)
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files').put(fileUid)
-        this.getBase64(this.fileList[i].originFileObj).then(str => {
+      for (let i = 0; i < fileNum; i += 1) {
+        const fileUid = this.uuid(8, 16);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+          .put(fileUid);
+        this.getBase64(this.fileList[i].originFileObj).then((str) => {
           tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-        .get(fileUid).put(str)
-        })
-
+            .get(fileUid)
+            .put(str);
+        });
       }
       this.visible = !this.visible;
 
       this.linkVisible = !this.linkVisible;
       window.storage.currentFile = {
         fileId: uid,
-        fileLink: window.location.origin+"/"+"?"+"fileId="+uid,
-      }
+        fileLink: `${window.location.origin}/?fileId=${uid}`,
+      };
       if (window.storage.vm && window.storage.vm.linkPage) {
         window.storage.vm.linkPage.updateFileInformation(
           window.storage.currentFile.fileId,
-          window.storage.currentFile.fileLink
+          window.storage.currentFile.fileLink,
         );
       }
-    }
-
+    },
   },
-
 };
 </script>
 

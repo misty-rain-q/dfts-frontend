@@ -36,7 +36,7 @@
         <span>可下载次数：&nbsp;&nbsp;</span>
         <a-select class="counter" default-value="max"
          style="width: 90px" @change="downloadCountChange" v-model="downlist">
-          <a-select-option value="max"  selected = 'true'>
+          <a-select-option value="max" >
             无限次
           </a-select-option>
           <a-select-option value="number" >
@@ -56,8 +56,8 @@ export default {
     return {
       disabled: true,
       password: '',
-      datelist: '',
-      downlist: '',
+      datelist: 'day',
+      downlist: 'max',
       downnum: 0,
 
     };

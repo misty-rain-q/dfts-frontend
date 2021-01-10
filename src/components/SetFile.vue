@@ -36,10 +36,10 @@
         <span>可下载次数：&nbsp;&nbsp;</span>
         <a-select class="counter" default-value="max"
          style="width: 90px" @change="downloadCountChange" v-model="downlist">
-          <a-select-option value="max">
+          <a-select-option value="max"  selected = 'true'>
             无限次
           </a-select-option>
-          <a-select-option value="number">
+          <a-select-option value="number" >
             有限次
           </a-select-option>
         </a-select>

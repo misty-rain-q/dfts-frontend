@@ -1,6 +1,7 @@
 import Vue from 'vue';
 // import ant from 'ant-design-vue/dist/antd';
 import 'ant-design-vue/dist/antd.css';
+import { message } from 'ant-design-vue';
 import Button from 'ant-design-vue/lib/button';
 import Modal from 'ant-design-vue/lib/modal';
 import Input from 'ant-design-vue/lib/input';
@@ -39,6 +40,7 @@ Vue.use(Progress);
 
 Vue.use(VueAxios, axios);
 
+Vue.prototype.$message = message;
 Vue.config.productionTip = false;
 
 Vue.use(VueGun, {
@@ -49,6 +51,14 @@ Vue.use(VueGun, {
   ],
   // radisk: true,
   // localStorage: false,
+});
+
+message.config({
+
+  duration: 2,
+  top: '100px',
+  maxCount: 3,
+
 });
 
 new Vue({

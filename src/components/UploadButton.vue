@@ -116,43 +116,48 @@ export default {
     },
 
     uploadToGundb() {
-      const tempThis = this;
-      const fileNum = this.fileList.length;
-      const uid = this.uuid(8, 16);
-      window.gun = tempThis.$gun;
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
-        .put(fileNum);
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
-        .put(this.extractionCode);
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('effectiveDate')
-        .put(this.effectiveDate);
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downloadTime')
-        .put(this.downloadTime);
-      tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
-        .put(this.downset);
+      if (this.fileList.length === 0) {
+        this.$message.error('上传错误，文件列表为空');
+      } else {
+        const tempThis = this;
+        const fileNum = this.fileList.length;
+        const uid = this.uuid(8, 16);
+        window.gun = tempThis.$gun;
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
+          .put(fileNum);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
+          .put(this.extractionCode);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('effectiveDate')
+          .put(this.effectiveDate);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downloadTime')
+          .put(this.downloadTime);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
+          .put(this.downset);
 
-      for (let i = 0; i < fileNum; i += 1) {
-        const fileUid = this.uuid(8, 16);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-          .put(fileUid);
-        this.getBase64(this.fileList[i].originFileObj).then((str) => {
+        for (let i = 0; i < fileNum; i += 1) {
+          const fileUid = this.uuid(8, 16);
           tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-            .get(fileUid)
-            .put(str);
-        });
-      }
-      this.visible = !this.visible;
+            .put(fileUid);
+          this.getBase64(this.fileList[i].originFileObj).then((str) => {
+            tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+              .get(fileUid)
+              .put(str);
+          });
+        }
+        this.$message.success('上传成功！');
+        this.visible = !this.visible;
 
-      this.linkVisible = !this.linkVisible;
-      window.storage.currentFile = {
-        fileId: uid,
-        fileLink: `${window.location.origin}/?fileId=${uid}`,
-      };
-      if (window.storage.vm && window.storage.vm.linkPage) {
-        window.storage.vm.linkPage.updateFileInformation(
-          window.storage.currentFile.fileId,
-          window.storage.currentFile.fileLink,
-        );
+        this.linkVisible = !this.linkVisible;
+        window.storage.currentFile = {
+          fileId: uid,
+          fileLink: `${window.location.origin}/?fileId=${uid}`,
+        };
+        if (window.storage.vm && window.storage.vm.linkPage) {
+          window.storage.vm.linkPage.updateFileInformation(
+            window.storage.currentFile.fileId,
+            window.storage.currentFile.fileLink,
+          );
+        }
       }
     },
   },

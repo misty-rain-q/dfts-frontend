@@ -52,9 +52,11 @@ export default {
   methods: {
     copyfileid() {
       copy(this.fileId);
+      this.$message.success('复制文件id成功！');
     },
 
     copyfilelink() {
+      this.$message.success('复制文件链接成功！');
       copy(this.fileLink);
     },
 

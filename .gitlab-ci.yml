@@ -40,11 +40,10 @@ build_production_pack:
     - node
   script:
     - yarn build
-    - cd dist
-    - tar czf production.tar.gz *
   artifacts:
+    name: production-pack
     paths:
-      - dist/production.tar.gz
+      - dist/
   only:
     - master
     - develop

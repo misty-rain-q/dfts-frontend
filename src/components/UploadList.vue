@@ -31,11 +31,10 @@ export default {
 #iploadlist{
     border:1px solid silver;
     height: 100%;
-    width: 280px;
 
 }
 
 .drag-upload-list >>> .ant-upload-list-item {
-  width: 280px;
+  width: 100%;
 }
 </style>

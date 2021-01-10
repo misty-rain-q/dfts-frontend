@@ -162,5 +162,11 @@ export default {
 <style scoped>
 /deep/ .ant-modal {
   width: 40rem !important;
+
+}
+
+/deep/ .ant-modal-body {
+  min-height: 300px;
+  max-height: 650px;
 }
 </style>

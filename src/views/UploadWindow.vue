@@ -1,7 +1,7 @@
 <template>
     <div class="uploadwindow">
       <div class="left">
-        <UploadList
+        <UploadList class="list"
         :default-file-list="currentFileList"
         ></UploadList>
       </div>
@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .uploadwindow {
   display: grid;
-  height: 300px;
+  height: 100%;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
@@ -80,6 +80,12 @@ export default {
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
+  min-height: 30px;
+  max-height: 300px;
+}
+
+.list {
+  overflow: auto;
 }
 
 .right {

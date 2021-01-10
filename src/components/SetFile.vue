@@ -87,8 +87,8 @@ export default {
       console.log('changed', value);
     },
     downloadCountChange() {
-      this.disabled = !this.disabled;
-      console.log(this.disabled);
+      if (this.downlist === 'max') this.disabled = true;
+      else this.disabled = false;
     },
 
   },

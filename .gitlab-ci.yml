@@ -1,6 +1,7 @@
 stages:
   - install_dependencies
   - test
+  - build_and_deliver
 
 cache:
   paths:
@@ -31,4 +32,20 @@ unit_test:
   script:
     - yarn test:unit
   only:
+    - merge_requests
+
+build_production_pack:
+  stage: build_and_deliver
+  tags:
+    - node
+  script:
+    - yarn build
+    - cd dist
+    - tar czf production.tar.gz *
+  artifacts:
+    paths:
+      - dist/production.tar.gz
+  only:
+    - master
+    - develop
     - merge_requests

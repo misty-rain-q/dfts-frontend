@@ -12,6 +12,7 @@ import InputNumber from 'ant-design-vue/lib/input-number';
 import VueGun from 'vue-gun';
 import Gun from 'gun';
 import Progress from 'ant-design-vue/lib/progress';
+import vuescroll from 'vuescroll';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -19,7 +20,7 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 import store from './store';
 import router from './router';
-
+import 'vuescroll/dist/vuescroll.css';
 import 'gun/lib/rindexed';
 import 'gun/lib/radix';
 import 'gun/lib/radisk';
@@ -37,7 +38,7 @@ Vue.use(Upload);
 Vue.use(Select);
 Vue.use(InputNumber);
 Vue.use(Progress);
-
+Vue.use(vuescroll);
 Vue.use(VueAxios, axios);
 
 Vue.prototype.$message = message;

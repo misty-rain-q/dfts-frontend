@@ -11782,6 +11782,11 @@ vue@^2.6.11:
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha1-9evU+mvShpQD4pqJau1JBEVskSM=
 
+vuescroll@^4.17.3:
+  version "4.17.3"
+  resolved "https://registry.npm.taobao.org/vuescroll/download/vuescroll-4.17.3.tgz#e1c29372a007e0dff0cee6b4515783d43924f9e1"
+  integrity sha1-4cKTcqAH4N/wzua0UVeD1Dkk+eE=
+
 vuex@^3.4.0:
   version "3.6.0"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.6.0.tgz?cache=0&sync_timestamp=1606318263999&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.6.0.tgz#95efa56a58f7607c135b053350833a09e01aa813"

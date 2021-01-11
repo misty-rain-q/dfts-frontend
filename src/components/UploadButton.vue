@@ -123,6 +123,7 @@ export default {
         const fileNum = this.fileList.length;
         const uid = this.uuid(8, 16);
         window.gun = tempThis.$gun;
+        const nowtime = new Date().toISOString();// 获取当前时间（0时区）
         tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
           .put(fileNum);
         tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
@@ -133,6 +134,8 @@ export default {
           .put(this.downloadTime);
         tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
           .put(this.downset);
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('uploadtime')
+          .put(nowtime);
 
         for (let i = 0; i < fileNum; i += 1) {
           const fileUid = this.uuid(8, 16);
@@ -141,7 +144,13 @@ export default {
           this.getBase64(this.fileList[i].originFileObj).then((str) => {
             tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
               .get(fileUid)
-              .put(str);
+              .put({
+                content: str,
+                filename: this.fileList[i].name,
+              });
+            tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+              .get(fileUid)
+              .on((obj) => console.log('file', obj));
           });
         }
         this.$message.success('上传成功！');

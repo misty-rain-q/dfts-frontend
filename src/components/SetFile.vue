@@ -52,6 +52,7 @@
 <script>
 export default {
   name: 'SetFile',
+
   data() {
     return {
       disabled: true,

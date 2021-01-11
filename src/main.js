@@ -23,7 +23,7 @@ import router from './router';
 import 'gun/lib/rindexed';
 import 'gun/lib/radix';
 import 'gun/lib/radisk';
-import 'gun/sea';
+// import 'gun/sea';
 import 'gun/lib/path';
 import 'gun/lib/load';
 import 'gun/lib/promise';

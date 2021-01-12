@@ -58,14 +58,18 @@ export default {
     cgdt(downnum) {
       this.$emit('changeDownloadTime', downnum);
     },
-
+    clearData() {
+      this.currentFileList = [];
+    },
   },
   components: {
     UploadList,
     ClickUpload,
     SetFile,
   },
-
+  mounted() {
+    window.eventBus.$on('upload-window-closed', this.clearData);
+  },
 };
 </script>
 

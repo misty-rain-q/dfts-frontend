@@ -91,7 +91,16 @@ export default {
       if (this.downlist === 'max') this.disabled = true;
       else this.disabled = false;
     },
-
+    clearData() {
+      this.disabled = true;
+      this.password = '';
+      this.datelist = 'day';
+      this.downlist = 'max';
+      this.downnum = 0;
+    },
+  },
+  mounted() {
+    window.eventBus.$on('upload-window-closed', this.clearData);
   },
 };
 

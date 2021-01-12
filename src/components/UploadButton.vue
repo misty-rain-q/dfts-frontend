@@ -45,6 +45,13 @@ export default {
       linkVisible: false,
     };
   },
+  watch: {
+    visible(val) {
+      if (!val) {
+        window.eventBus.$emit('upload-window-closed');
+      }
+    },
+  },
   methods: {
     turnToUploadPage() {
       this.visible = true;

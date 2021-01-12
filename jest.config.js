@@ -3,4 +3,10 @@ module.exports = {
   setupFiles: [
     '<rootDir>/tests/setup.js',
   ],
+  collectCoverageFrom: [
+    '**/*.{js,vue}',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/dist/**',
+  ],
 };

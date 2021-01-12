@@ -27,14 +27,16 @@ lint:
   only:
     - merge_requests
 
-unit_test:
+unit_test_with_coverage:
   stage: test
   tags:
     - node
   script:
-    - yarn test:unit
+    - yarn test:unit --coverage
   only:
     - merge_requests
+    - master
+    - develop
 
 build_production_pack:
   stage: build_and_deliver

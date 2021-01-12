@@ -27,15 +27,17 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import 'vuescroll/dist/vuescroll.css';
-import 'gun/lib/rindexed';
+
+import 'gun/gun';
 import 'gun/lib/radix';
 import 'gun/lib/radisk';
-// import 'gun/sea';
+import 'gun/lib/store';
+import 'gun/lib/rindexed';
 import 'gun/lib/path';
 import 'gun/lib/load';
 import 'gun/lib/promise';
 
-require('vue-video-player/src/custom-theme.css');
+import 'vue-video-player/src/custom-theme.css';
 
 // Vue.use(ant);
 Vue.use(VideoPlayer);
@@ -57,14 +59,17 @@ Vue.use(VueAxios, axios);
 Vue.prototype.$message = message;
 Vue.config.productionTip = false;
 
+const gunOptions = {
+  localStorage: false,
+};
+
 Vue.use(VueGun, {
   peers: [
     // empty at start; first peer is added after backend base URL is detected
     // do NOT add options here; this instance will be replaced by another in
     // the `created` hook below
   ],
-  // radisk: true,
-  // localStorage: false,
+  ...gunOptions,
 });
 
 message.config({
@@ -127,9 +132,8 @@ new Vue({
           // FIXME The method above does not seem to work; re-create the gun
           // instance as a workaround
           Vue.prototype.$gun = Gun({
-            peers: [
-              `${baseUrl}/gun`,
-            ],
+            peers: [`${baseUrl}/gun`],
+            ...gunOptions,
           });
           console.log(`Added first GUN peer ${baseUrl}/gun`);
         } else {

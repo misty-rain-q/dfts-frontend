@@ -7,9 +7,14 @@ import Modal from 'ant-design-vue/lib/modal';
 import Input from 'ant-design-vue/lib/input';
 import CheckBox from 'ant-design-vue/lib/checkbox';
 import Table from 'ant-design-vue/lib/table';
+import Drawer from 'ant-design-vue/lib/drawer';
 import Upload from 'ant-design-vue/lib/upload';
 import Select from 'ant-design-vue/lib/select';
 import InputNumber from 'ant-design-vue/lib/input-number';
+import VideoPlayer from 'vue-video-player';
+import Viewer from 'v-viewer';
+import PDF from 'pdfjs-dist';
+import 'viewerjs/dist/viewer.css';
 import VueGun from 'vue-gun';
 import Gun from 'gun';
 import Progress from 'ant-design-vue/lib/progress';
@@ -30,12 +35,18 @@ import 'gun/lib/path';
 import 'gun/lib/load';
 import 'gun/lib/promise';
 
+require('vue-video-player/src/custom-theme.css');
+
 // Vue.use(ant);
+Vue.use(VideoPlayer);
 Vue.use(Button);
 Vue.use(Modal);
 Vue.use(Input);
 Vue.use(CheckBox);
 Vue.use(Table);
+Vue.use(Drawer);
+Vue.use(Viewer);
+Vue.use(PDF);
 Vue.use(Upload);
 Vue.use(Select);
 Vue.use(InputNumber);
@@ -62,6 +73,12 @@ message.config({
   top: '100px',
   maxCount: 3,
 
+});
+
+Viewer.setDefaults({
+  Options: {
+    inline: true, button: true, navbar: true, title: true, toolbar: true, tooltip: true, movable: true, zoomable: true, rotatable: true, scalable: true, transition: true, fullscreen: true, keyboard: true, url: 'data-source',
+  },
 });
 
 new Vue({

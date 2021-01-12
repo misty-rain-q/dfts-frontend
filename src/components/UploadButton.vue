@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 import UploadWindow from '../views/UploadWindow.vue';
 
 import LinkPage from '../views/LinkPage.vue';
@@ -48,7 +50,7 @@ export default {
   watch: {
     visible(val) {
       if (!val) {
-        window.eventBus.$emit('upload-window-closed');
+        Vue.eventBus.$emit('upload-window-closed');
       }
     },
   },

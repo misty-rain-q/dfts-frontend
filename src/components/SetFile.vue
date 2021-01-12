@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
   name: 'SetFile',
 
@@ -100,7 +102,7 @@ export default {
     },
   },
   mounted() {
-    window.eventBus.$on('upload-window-closed', this.clearData);
+    Vue.eventBus.$on('upload-window-closed', this.clearData);
   },
 };
 

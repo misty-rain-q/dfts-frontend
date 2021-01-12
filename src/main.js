@@ -142,5 +142,4 @@ new Vue({
 // TODO Replace this storage to a more elegant one, e.g. Vuex
 window.storage = {};
 
-// Event bus to help pass events from and to different components
-window.eventBus = new Vue({});
+Vue.eventBus = new Vue({});

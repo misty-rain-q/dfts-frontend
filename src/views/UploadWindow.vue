@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 import UploadList from '@/components/UploadList.vue';
 import ClickUpload from '@/components/ClickUpload.vue';
 import SetFile from '@/components/SetFile.vue';
@@ -68,7 +70,7 @@ export default {
     SetFile,
   },
   mounted() {
-    window.eventBus.$on('upload-window-closed', this.clearData);
+    Vue.eventBus.$on('upload-window-closed', this.clearData);
   },
 };
 </script>

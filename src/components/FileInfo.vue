@@ -5,7 +5,11 @@
         <p>上传时间：</p>
     </div>
 </template>
+<script>
+export default {
 
+};
+</script>
 <style scoped>
 .fileInfo {
     text-align: left;

@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 
 const columns = [
   {
@@ -36,31 +37,11 @@ const columns = [
     align: 'center',
   },
 ];
-const data = [
-  {
-    key: '1',
-    name: '图片文件',
-    address: '../assets/temple2.jpg',
-    type: 'jpg',
-  },
-  {
-    key: '2',
-    name: 'pdf文件',
-    address: '../assets/temple1.pdf',
-    type: 'pdf',
-  },
-  {
-    key: '3',
-    name: '视频文件',
-    address: '../assets/temple3.mp4',
-    type: 'mp4',
-  },
-];
 
 export default {
   data() {
     return {
-      data,
+      data: [],
       columns,
       visible: false,
       placement: 'left',
@@ -111,6 +92,12 @@ export default {
     onClose() {
       this.visible = false;
     },
+  },
+  mounted() {
+    Vue.eventBus.$on('download-file-list-changed', (fileList) => {
+      this.data = fileList;
+    });
+    Vue.eventBus.$emit('download-file-list-needed');
   },
 };
 </script>

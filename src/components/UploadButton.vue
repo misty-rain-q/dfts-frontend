@@ -148,8 +148,8 @@ export default {
 
         for (let i = 0; i < fileNum; i += 1) {
           const fileUid = this.uuid(8, 16);
-          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-            .put(fileUid);
+          // tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+          //   .put(fileUid);
           this.getBase64(this.fileList[i].originFileObj).then((str) => {
             tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
               .get(fileUid)

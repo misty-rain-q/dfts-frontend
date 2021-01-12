@@ -72,6 +72,8 @@ Vue.use(VueGun, {
   ...gunOptions,
 });
 
+Vue.eventBus = new Vue({});
+
 message.config({
 
   duration: 2,
@@ -145,5 +147,3 @@ new Vue({
 
 // TODO Replace this storage to a more elegant one, e.g. Vuex
 window.storage = {};
-
-Vue.eventBus = new Vue({});

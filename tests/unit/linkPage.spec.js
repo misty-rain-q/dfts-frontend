@@ -24,7 +24,6 @@ Vue.use(Progress);
 
 describe.skip('LinkPage.vue', () => {
   const wrapper = mount(LinkPage);
-
   it('has two button', () => {
     const button = wrapper.findAll('button');
     expect(button.length).toBe(2);

@@ -28,8 +28,8 @@ describe('DownloadButton.vue', () => {
   it('click event', () => {
     const button = wrapper.find('button');
     button.trigger('click');
-    console.log(wrapper.vm.visible);
-    expect(wrapper.vm.visible).toBe(true);
+    console.log(wrapper.vm.passwordInputVisible);
+    expect(wrapper.vm.passwordInputVisible).toBe(true);
   });
 
   it('a-input event', () => {

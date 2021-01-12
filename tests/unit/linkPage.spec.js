@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import LinkPage from '@/views/LinkPage.vue';
 import Vue from 'vue';
+import VueQr from 'vue-qr';
 import Button from 'ant-design-vue/lib/button';
 import Modal from 'ant-design-vue/lib/modal';
 import Input from 'ant-design-vue/lib/input';
@@ -11,6 +12,7 @@ import InputNumber from 'ant-design-vue/lib/input-number';
 import Progress from 'ant-design-vue/lib/progress';
 
 // Vue.use(ant);
+Vue.use(VueQr);
 Vue.use(Button);
 Vue.use(Modal);
 Vue.use(Input);

@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Home from '@/views/Home.vue';
 import Vue from 'vue';
+import VueQr from 'vue-qr';
 import Button from 'ant-design-vue/lib/button';
 import Modal from 'ant-design-vue/lib/modal';
 import Input from 'ant-design-vue/lib/input';
@@ -10,6 +11,7 @@ import Select from 'ant-design-vue/lib/select';
 import InputNumber from 'ant-design-vue/lib/input-number';
 
 // Vue.use(ant);
+Vue.use(VueQr);
 Vue.use(Button);
 Vue.use(Modal);
 Vue.use(Input);

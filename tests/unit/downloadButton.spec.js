@@ -25,11 +25,18 @@ Vue.use(InputNumber);
 const wrapper = mount(DownloadButton);
 
 describe('DownloadButton.vue', () => {
-  it('click event', () => {
+  it('should not show download dialog when files do not exist', () => {
     const button = wrapper.find('button');
     button.trigger('click');
-    console.log(wrapper.vm.passwordInputVisible);
-    expect(wrapper.vm.passwordInputVisible).toBe(true);
+    expect(wrapper.vm.visible).toBe(false);
+  });
+
+  it.skip('should show download dialog when files exist', () => {
+    // TODO
+  });
+
+  it.skip('should show password dialog when downloading files with password', () => {
+    // TODO
   });
 
   it('a-input event', () => {

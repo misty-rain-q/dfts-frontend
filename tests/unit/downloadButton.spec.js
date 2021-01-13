@@ -25,24 +25,37 @@ Vue.use(InputNumber);
 const wrapper = mount(DownloadButton);
 
 describe('DownloadButton.vue', () => {
+  it('matches snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('should not show download dialog when files do not exist', () => {
     const button = wrapper.find('button');
     button.trigger('click');
     expect(wrapper.vm.visible).toBe(false);
   });
 
-  it.skip('should show download dialog when files exist', () => {
-    // TODO
+  it('passwordHandleOk function', () => {
+    wrapper.vm.extraction = '123';
+    wrapper.vm.password = '123';
+    // wrapper.vm.passwordHandleOk();
+    const mockFn1 = jest.fn();
+    wrapper.vm.$on('passwordHandleOk', mockFn1);
+    // expect(wrapper.vm.passwordInputVisible).toBe(true);
   });
 
-  it.skip('should show password dialog when downloading files with password', () => {
-    // TODO
-  });
+  // it.skip('should show download dialog when files exist', () => {
+  //   // TODO
+  // });
 
-  it('a-input event', () => {
-    const button = wrapper.find('AInput');
-    // button.trigger('click');
-    console.log(button);
-    // expect(wrapper.vm.visible).toBe(true);
-  });
+  // it.skip('should show password dialog when downloading files with password', () => {
+  //   // TODO
+  // });
+
+  // it('a-input event', () => {
+  //   const button = wrapper.find('Input');
+  //   // button.trigger('click');
+  //   console.log(button);
+  //   // expect(wrapper.vm.visible).toBe(true);
+  // });
 });

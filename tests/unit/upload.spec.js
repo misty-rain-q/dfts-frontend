@@ -25,6 +25,10 @@ Vue.use(InputNumber);
 const wrapper = mount(UploadWindow);
 
 describe('UploadWindow.vue', () => {
+  it('matches snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('has inputs', () => {
     const inputs = wrapper.findAll('input');
     console.log(inputs.length);

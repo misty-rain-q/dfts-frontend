@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClickUpload.vue matches snapshot 1`] = `
+<div class="dragupload"><span><div class="ant-upload ant-upload-drag"><span role="button" tabindex="0" class="ant-upload ant-upload-btn"><input type="file" accept="" multiple="multiple" style="display: none;"><div class="ant-upload-drag-container"><p class="upload-drag-icon"><img src="../assets/file.png" alt="" class="file-icon"></p> <p class="upload-text">
+    点击或将文件拖拽到这里上传
+  </p> <p class="upload-hint">
+    支持扩展名：.rar .zip .doc .docx .pdf .jpg
+  </p></div></span></div></span></div>
+`;

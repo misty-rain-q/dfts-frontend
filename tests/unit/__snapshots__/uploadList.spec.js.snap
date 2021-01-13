@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadList.vue matches snapshot 1`] = `
+<div id="iploadlist"><span class="drag-upload-list"><div class="ant-upload ant-upload-select ant-upload-select-text" style="display: none;"><span role="button" tabindex="0" class="ant-upload"><input type="file" accept="" style="display: none;"></span></div>
+<transition-group-stub tag="div" appear="true" class="ant-upload-list ant-upload-list-text"></transition-group-stub></span></div>
+`;

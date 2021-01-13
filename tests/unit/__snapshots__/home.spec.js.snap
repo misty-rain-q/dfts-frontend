@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home.vue matches snapshot 1`] = `
+<div class="home"><img src="../assets/pageLogo.png" alt="" class="logo"> <br> <br>
+  <div class="downloadButton"><span class="ant-input-search ant-input-affix-wrapper" style="width: 35%;"><input placeholder="搜索想要的文件id" type="text" id="ainput" class="ant-input"><span class="ant-input-suffix"><i aria-label="icon: search" tabindex="-1" class="anticon anticon-search ant-input-search-icon"><svg viewBox="64 64 896 896" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></i></span></span>
+    &nbsp;
+    <button type="button" class="ant-btn ant-btn-primary"><i aria-label="icon: download" class="anticon anticon-download"><svg viewBox="64 64 896 896" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
+          <path d="M505.7 661a8 8 0 0 0 12.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+        </svg></i><span>下载</span></button>
+    <!---->
+    <!---->
+  </div> <br> <br>
+  <div class="uploadButton"><button type="button" class="ant-btn ant-btn-primary"><i aria-label="icon: upload" class="anticon anticon-upload"><svg viewBox="64 64 896 896" data-icon="upload" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
+          <path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 0 0-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path>
+        </svg></i><span>上传</span></button>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;

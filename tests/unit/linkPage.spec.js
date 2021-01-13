@@ -21,8 +21,14 @@ Vue.use(Upload);
 Vue.use(Select);
 Vue.use(InputNumber);
 Vue.use(Progress);
+window.storage = {};
+window.storage.currentFile = {
+  fileId: 123,
+  fileLink: 123,
+};
 
 describe.skip('LinkPage.vue', () => {
+  jest.mock(window.Storage.currrentFile);
   const wrapper = mount(LinkPage);
 
   it('matches snapshot', () => {

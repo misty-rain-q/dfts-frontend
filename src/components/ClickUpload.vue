@@ -5,6 +5,7 @@
     name="file"
     :multiple="true"
     :before-upload="() => false"
+    :file-list="fileList"
     @change="handleChange"
   >
     <p class="upload-drag-icon">
@@ -20,14 +21,23 @@
   </div>
 </template>
 <script>
+import Vue from 'vue';
+
 export default {
   data() {
-    return {};
+    return {
+      fileList: [],
+    };
   },
   methods: {
     handleChange(info) {
       this.$emit('filelist-changed', info.fileList);
     },
+  },
+  mounted() {
+    Vue.eventBus.$on('upload-window-closed', () => {
+      this.fileList = [];
+    });
   },
 };
 </script>

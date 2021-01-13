@@ -16,7 +16,7 @@
      :maskClosable= "false" v-model="visible" title="下载" @ok="download">
       <download-window></download-window>
     </a-modal>
-    
+
   </div>
 </template>
 
@@ -33,6 +33,7 @@ export default {
     return {
       visible: false,
       passwordInputVisible: false,
+      password: '',
       inputValue: '',
       fileIsDownloading: false,
       filenum: 0,
@@ -49,7 +50,11 @@ export default {
       this.passwordInputVisible = false;
     },
     onSearch(value) {
-      console.log(value);
+      const downloadFileId = value;
+      this.$gun.get('gun-dfts').get('transfers').get(downloadFileId).load(function (data) {
+        this.password = data.extractionCode;
+      });
+      console.log(`password:${this.password}`);
       this.passwordInputVisible = true;
       this.turnToDownloadPage();
     },
@@ -58,29 +63,35 @@ export default {
       const downloadFileId = this.inputValue;
       // 添加一个输入提取码的对话框
       const tempThis = this;
-
-      this.$gun.get('gun-dfts').get('transfers').get(downloadFileId).load(function (data) {
-        this.filenum = data.total;
-        this.datelist = data.effectiveDate;
-        this.downset = data.downset;
-        this.downnum = data.downloadTime;
-        this.uploadtime = data.uploadtime;
-      });
-      this.$gun.get('gun-dfts').get('transfers').get(downloadFileId).get('files')
-        .load((files) => {
-          this.fileList = [];
-          Object.keys(files).forEach((id) => {
-            const fileMessage = files[id];
-            this.fileList.push({
-              key: id,
-              type: tempThis.getTypeFromMime(fileMessage.content),
-              name: fileMessage.filename,
-              address: fileMessage.content,
-            });
+      if (this.inputValue === '') {
+        this.$message.error('文件id为空');
+      } else {
+        this.$gun.get('gun-dfts').get('transfers').get(downloadFileId).not(() => {
+          this.$message.error('未找到对应文件');
+        })
+          .load((data) => {
+            this.filenum = data.total;
+            this.datelist = data.effectiveDate;
+            this.downset = data.downset;
+            this.downnum = data.downloadTime;
+            this.uploadtime = data.uploadtime;
+            this.$gun.get('gun-dfts').get('transfers').get(downloadFileId).get('files')
+              .load((files) => {
+                this.fileList = [];
+                Object.keys(files).forEach((id) => {
+                  const fileMessage = files[id];
+                  this.fileList.push({
+                    key: id,
+                    type: tempThis.getTypeFromMime(fileMessage.content),
+                    name: fileMessage.filename,
+                    address: fileMessage.content,
+                  });
+                });
+                this.visible = true;
+                Vue.eventBus.$emit('download-file-list-changed', this.fileList);
+              });
           });
-          this.visible = true;
-          Vue.eventBus.$emit('download-file-list-changed', this.fileList);
-        });
+      }
     },
     getTypeFromMime(mimeType) {
       return mimeType && null;

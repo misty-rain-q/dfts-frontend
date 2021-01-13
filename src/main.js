@@ -34,6 +34,7 @@ import 'gun/lib/radisk';
 import 'gun/lib/store';
 import 'gun/lib/rindexed';
 import 'gun/lib/path';
+import 'gun/lib/not';
 import 'gun/lib/load';
 import 'gun/lib/promise';
 

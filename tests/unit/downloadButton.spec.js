@@ -35,13 +35,19 @@ describe('DownloadButton.vue', () => {
     expect(wrapper.vm.visible).toBe(false);
   });
 
-  it('passwordHandleOk function', () => {
+  it.skip('passwordHandleOk function', () => {
     wrapper.vm.extraction = '123';
     wrapper.vm.password = '123';
-    // wrapper.vm.passwordHandleOk();
-    const mockFn1 = jest.fn();
-    wrapper.vm.$on('passwordHandleOk', mockFn1);
+    wrapper.vm.passwordHandleOk();
+    // const mockFn1 = jest.fn();
+    // wrapper.vm.$on('passwordHandleOk', mockFn1);
     // expect(wrapper.vm.passwordInputVisible).toBe(true);
+  });
+
+  it('download function', () => {
+    wrapper.vm.visible = true;
+    wrapper.vm.download();
+    expect(wrapper.vm.visible).toBe(false);
   });
 
   // it.skip('should show download dialog when files exist', () => {

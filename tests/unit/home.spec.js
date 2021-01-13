@@ -23,6 +23,9 @@ Vue.use(InputNumber);
 const wrapper = mount(Home);
 
 describe('Home.vue', () => {
+  it('matches snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
   it('has a img', () => {
     const imgs = wrapper.findAll('img');
     expect(imgs.length).toBe(1);

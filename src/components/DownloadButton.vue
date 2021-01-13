@@ -34,6 +34,7 @@ export default {
       isCorrect: false,
       visible: false,
       passwordInputVisible: false,
+      fid: '', // 测试
       password: '',
       extraction: '',
       inputValue: '',
@@ -48,7 +49,6 @@ export default {
   },
   methods: {
     passwordHandleOk() {
-      const tempThis = this;
       this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).load(function (data) {
         this.extraction = data.extractionCode;
       });
@@ -60,34 +60,44 @@ export default {
         this.visible = true;
         this.passwordInputVisible = false;
         if (this.isCorrect === true) {
-          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('files')
-            .load((files) => {
-              this.fileList = [];
-              Object.keys(files).forEach((id) => {
-                const fileMessage = files[id];
-                this.fileList.push({
-                  key: id,
-                  type: tempThis.getTypeFromMime(fileMessage.content),
-                  name: fileMessage.filename,
-                  address: fileMessage.content,
-                });
-              });
-
-              console.log('fucked');
-              this.visible = true;
-
-              Vue.eventBus.$emit('download-file-list-changed', this.fileList);
-              console.log('fucker');
-            });
+          this.fileSet();
         }
       } else {
         this.$message.error('提取码错误');
       }
     },
+    fileSet() {
+      const tempThis = this;
+      this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('files')
+        .load((files) => {
+          this.fileList = [];
+          Object.keys(files).forEach((id) => {
+            const fileMessage = files[id];
+            this.fileList.push({
+              key: id,
+              type: tempThis.getTypeFromMime(fileMessage.content),
+              name: fileMessage.filename,
+              address: fileMessage.content,
+            });
+          });
+
+          console.log('fucked');
+          this.visible = true;
+
+          Vue.eventBus.$emit('download-file-list-changed', this.fileList);
+          console.log('fucker');
+        });
+    },
 
     turnToDownloadPage() {
       this.isCorrect = false;
       const downloadFileId = this.inputValue;
+
+      // this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).load(function (data){
+      //   filecontent = data;
+      //   console.log('filecontent'+filecontent);
+
+      // });
 
       if (this.inputValue === '') {
         this.$message.error('文件id为空');
@@ -96,14 +106,22 @@ export default {
           this.$message.error('未找到对应文件');
         })
           .load((data) => {
-            console.log('fucking', data);
-            this.filenum = data.total;
-            this.datelist = data.effectiveDate;
-            this.downset = data.downset;
-            this.downnum = data.downloadTime;
-            this.uploadtime = new Date(data.uploadtime);
-            this.extraction = data.extractionCode;
-            this.passwordInputVisible = true;
+            if (data) {
+              this.filenum = data.total;
+              this.datelist = data.effectiveDate;
+              this.downset = data.downset;
+              this.downnum = data.downloadTime;
+              this.uploadtime = new Date(data.uploadtime);
+              this.extraction = data.extractionCode;
+              if (this.extraction !== '') {
+                this.passwordInputVisible = true;
+              } else {
+                this.visible = true;
+                this.fileSet();
+              }
+            } else {
+              this.$message.error('文件已失效');
+            }
           });
       }
     },
@@ -150,11 +168,25 @@ export default {
             element.href = file.address;
             element.download = file.name;
             element.click();
+            this.$message.success('正在下载!');
           }
         });
       });
       Vue.eventBus.$emit('checked-file-list-required', callbackEventName);
       console.log('download file list required');
+      if (this.downset === 'number') {
+        if (this.downnum > 1) {
+          this.downnum -= 1;
+          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('effectiveDate')
+            .put(this.downnum - 1);
+          console.log('下载次数已经减一');
+        } else {
+          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
+          this.visible = false;
+          this.$message.error('文件下载次数为0');
+          console.log('节点已删除');
+        }
+      }
 
       // this.visible = false;
     },
@@ -166,6 +198,7 @@ export default {
       console.log('fuck');
     });
   },
+
 };
 </script>
 

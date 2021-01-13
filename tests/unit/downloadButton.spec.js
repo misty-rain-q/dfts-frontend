@@ -50,6 +50,12 @@ describe('DownloadButton.vue', () => {
   //   expect(wrapper.vm.visible).toBe(false);
   // });
 
+  // it('download function', () => {
+  //   wrapper.vm.visible = true;
+  //   wrapper.vm.download();
+  //   expect(wrapper.vm.visible).toBe(false);
+  // });
+
   // it.skip('should show download dialog when files exist', () => {
   //   // TODO
   // });

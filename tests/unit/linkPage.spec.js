@@ -24,6 +24,11 @@ Vue.use(Progress);
 
 describe.skip('LinkPage.vue', () => {
   const wrapper = mount(LinkPage);
+
+  it('matches snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('has two button', () => {
     const button = wrapper.findAll('button');
     expect(button.length).toBe(2);

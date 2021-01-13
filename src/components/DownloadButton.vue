@@ -55,8 +55,8 @@ export default {
       if (this.password === this.extraction) {
         console.log('提取码正确');
         this.isCorrect = true;
-        this.password = '';
-        this.extraction = '';
+        // this.password = '';
+        // this.extraction = '';
         this.visible = true;
         this.passwordInputVisible = false;
         if (this.isCorrect === true) {
@@ -96,11 +96,12 @@ export default {
           this.$message.error('未找到对应文件');
         })
           .load((data) => {
+            console.log('fucking', data);
             this.filenum = data.total;
             this.datelist = data.effectiveDate;
             this.downset = data.downset;
             this.downnum = data.downloadTime;
-            this.uploadtime = data.uploadtime;
+            this.uploadtime = new Date(data.uploadtime);
             this.extraction = data.extractionCode;
             this.passwordInputVisible = true;
           });
@@ -110,7 +111,52 @@ export default {
       return mimeType && null;
     },
     download() {
-      this.visible = false;
+      if (this.datelist !== 'forever') {
+        const expireDate = new Date();
+        let addition = 1;
+        switch (this.datelist) {
+          case 'month':
+            addition = 30 * 24 * 60 * 60 * 1000;
+            break;
+          case 'week':
+            addition *= 7 * 24 * 60 * 60 * 1000;
+            break;
+          case 'day':
+            addition *= 24 * 60 * 60 * 1000;
+            break;
+          case 'hour':
+            addition *= 60 * 60 * 1000;
+            break;
+          default:
+            console.error(`Invalid expire option ${this.datelist}`);
+            console.error('this datelist', this.datelist);
+        }
+        expireDate.setTime(this.uploadtime + addition);
+        const currentDate = new Date();
+        if (expireDate < currentDate) {
+          this.$message.error('文件已过期');
+          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
+        }
+      }
+      const callbackEventName = `checked-file-list-satisfied-${Date.now()}`;
+      console.log(callbackEventName);
+      Vue.eventBus.$on(callbackEventName, (keys) => {
+        console.log('downloading', keys);
+        this.fileList.forEach((file) => {
+          console.log('file key', file.key);
+          if (keys.includes(file.key)) {
+            console.log('downloading');
+            const element = document.createElement('a');
+            element.href = file.address;
+            element.download = file.name;
+            element.click();
+          }
+        });
+      });
+      Vue.eventBus.$emit('checked-file-list-required', callbackEventName);
+      console.log('download file list required');
+
+      // this.visible = false;
     },
 
   },

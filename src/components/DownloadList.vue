@@ -41,6 +41,7 @@ const columns = [
 export default {
   data() {
     return {
+      selectedItemKeys: [],
       data: [],
       columns,
       visible: false,
@@ -80,6 +81,10 @@ export default {
             name: record.name,
           },
         }),
+        onChange: (selectedRowKeys) => {
+          this.selectedItemKeys = selectedRowKeys;
+          console.log(this.selectedItemKeys);
+        },
       };
     },
   },
@@ -98,6 +103,10 @@ export default {
       this.data = fileList;
     });
     Vue.eventBus.$emit('download-file-list-needed');
+    Vue.eventBus.$on('checked-file-list-required', (callbackEventName) => {
+      console.log('signal received');
+      Vue.eventBus.$emit(callbackEventName, this.selectedItemKeys);
+    });
   },
 };
 </script>

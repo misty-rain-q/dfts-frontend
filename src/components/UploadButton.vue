@@ -41,9 +41,9 @@ export default {
       visible: false,
       fileList: [],
       extractionCode: '',
-      effectiveDate: '',
+      effectiveDate: 'day',
       downloadTime: 0,
-      downset: '',
+      downset: 'max',
       linkVisible: false,
     };
   },
@@ -146,6 +146,13 @@ export default {
         tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('uploadtime')
           .put(nowtime);
 
+        console.log('original data', {
+          extractionCode: this.extractionCode,
+          downloadTime: this.downloadTime,
+          effectiveDate: this.effectiveDate,
+          downset: this.downset,
+        });
+
         for (let i = 0; i < fileNum; i += 1) {
           const fileUid = this.uuid(8, 16);
           // tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
@@ -162,6 +169,10 @@ export default {
               .on((obj) => console.log('file', obj));
           });
         }
+
+        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).once((data) => {
+          console.log('uploaded transfer', data);
+        });
         this.$message.success('上传成功！');
         this.visible = !this.visible;
 

@@ -14,7 +14,6 @@ import InputNumber from 'ant-design-vue/lib/input-number';
 import icon from 'ant-design-vue/lib/icon';
 import VideoPlayer from 'vue-video-player';
 import Viewer from 'v-viewer';
-// import PDF from 'pdfjs-dist';
 import 'viewerjs/dist/viewer.css';
 import VueGun from 'vue-gun';
 import Gun from 'gun';
@@ -39,6 +38,7 @@ import 'gun/lib/not';
 import 'gun/lib/load';
 import 'gun/lib/promise';
 
+import 'video.js/dist/video-js.css';
 import 'vue-video-player/src/custom-theme.css';
 
 // Vue.use(ant);
@@ -50,7 +50,6 @@ Vue.use(CheckBox);
 Vue.use(Table);
 Vue.use(Drawer);
 Vue.use(Viewer);
-// Vue.use(PDF);
 Vue.use(Upload);
 Vue.use(Select);
 Vue.use(InputNumber);

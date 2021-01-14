@@ -197,6 +197,13 @@ export default {
       Vue.eventBus.$emit('download-file-list-changed', this.fileList);
       console.log('fuck');
     });
+    const params = new URLSearchParams(window.location.search.slice(1));
+    const transferId = params.get('fileId');
+    if (transferId) {
+      console.log(`Detected transfer ID ${transferId}`);
+      this.inputValue = transferId;
+      this.turnToDownloadPage();
+    }
   },
 
 };

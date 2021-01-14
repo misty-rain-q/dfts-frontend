@@ -52,7 +52,7 @@ const columns = [
 export default {
   data() {
     return {
-      numPages: 20,
+      numPages: 2,
       photo_content: '../assets/temple2.jpg',
       pdf_content: '',
       selectedItemKeys: [],
@@ -130,10 +130,12 @@ export default {
         // img.click();
       } else if (judge === 'application') {
         if (str === 'application/pdf') {
-          this.visible = true;
-          this.pdf_visible = true;
-          this.pdf_content = address;
-          this.$options.methods.getNumPages(address);
+          this.$options.methods.getNumPages(address).then((numPages) => {
+            this.numPages = numPages;
+            this.visible = true;
+            this.pdf_visible = true;
+            this.pdf_content = address;
+          });
         }
       }
     },
@@ -141,9 +143,8 @@ export default {
     // 计算PDF的页码数
     getNumPages(url) {
       const loadingTask = pdf.createLoadingTask(url);
-      loadingTask.promise.then((pdf1) => {
-        this.numPages = pdf1.numPages;
-      }).catch((err) => {
+      console.log('完成！！！');
+      return loadingTask.promise.then((pdf1) => pdf1.numPages).catch((err) => {
         console.error('pdf 加载失败', err);
       });
     },

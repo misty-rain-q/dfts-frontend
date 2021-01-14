@@ -1,6 +1,6 @@
 <template>
   <div class="downloadButton">
-    <a-input-search id="ainput" v-model="inputValue"
+    <a-input-search id="ainput" v-model="inputValue" @search="turnToDownloadPage"
     placeholder="搜索想要的文件id" style="width: 35%" />
     &nbsp;
     <a-button type="primary" icon="download" @click="turnToDownloadPage">
@@ -212,5 +212,10 @@ export default {
 <style scoped>
 .ant-input-search {
   min-width: 200px;
+}
+
+/deep/ .ant-modal {
+  width: 40rem !important;
+
 }
 </style>

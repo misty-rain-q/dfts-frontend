@@ -1,11 +1,11 @@
 <template>
   <div>
     <a-table class="downlist"
-      :row-selection="rowSelection"
-      :columns="columns"
+      :row-selection="rowSelection" :pagination="false"
+      :columns="columns" size="small"
       :data-source="data">
       <span slot="action" slot-scope="text,record">
-        <a @click="preview(record.address)">预览</a>
+        <a @click="preview(record.address)"><a-icon type="eye" title="预览" /></a>
       </span>
     </a-table>
     <a-drawer
@@ -27,12 +27,13 @@ const columns = [
   {
     title: '文件',
     dataIndex: 'name',
+    ellipsis: true,
     align: 'center',
   },
   {
     title: '',
     dataIndex: 'action',
-    width: '25%',
+    width: '10%',
     scopedSlots: { customRender: 'action' },
     align: 'center',
   },
@@ -112,6 +113,16 @@ export default {
 </script>
 
 <style>
+.downlist {
+
+}
+
+.ant-table {
+  overflow: auto;
+  max-height: 300px;
+  min-height: 20px;
+}
+
 .pdf{
   position: fixed;
   height: 100%;

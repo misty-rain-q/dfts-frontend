@@ -1,7 +1,7 @@
 <template>
     <div class="downloadWindow">
         <div class="left">
-          <DownloadList></DownloadList>
+          <DownloadList class="list"></DownloadList>
         </div>
 
         <div class="right">
@@ -29,16 +29,21 @@ export default {
 
 <style scoped>
 .downloadWindow {
-  display: flex;
-  height: 300px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
 }
 
 .left {
-  width: 150%;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  min-height: 30px;
+  max-height: 300px;
 }
 
 .right {
+  margin-left: 30px;
   text-align: center;
 }
 

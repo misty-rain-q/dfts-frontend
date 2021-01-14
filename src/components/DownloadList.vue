@@ -22,7 +22,7 @@
         v-show="video_visible">
       </video-player>
       <viewer v-show="photo_visible">
-        <img :src= "photo_content"/>
+        <img id="imgshow" :src= "photo_content"/>
       </viewer>
       <pdf v-for="i in numPages" :key="i"  :page="i" :src= "pdf_content" v-show="pdf_visible"></pdf>
     </a-drawer>
@@ -126,6 +126,8 @@ export default {
         this.visible = true;
         this.photo_visible = true;
         this.photo_content = address;
+        // const img = document.getElementById('imgshow');
+        // img.click();
       } else if (judge === 'application') {
         if (str === 'application/pdf') {
           this.visible = true;

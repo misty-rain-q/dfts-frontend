@@ -14,6 +14,7 @@ import InputNumber from 'ant-design-vue/lib/input-number';
 import icon from 'ant-design-vue/lib/icon';
 import VideoPlayer from 'vue-video-player';
 import Viewer from 'v-viewer';
+import Switch from 'ant-design-vue/lib/switch';
 import 'viewerjs/dist/viewer.css';
 import VueGun from 'vue-gun';
 import Gun from 'gun';
@@ -55,6 +56,7 @@ Vue.use(Select);
 Vue.use(InputNumber);
 Vue.use(icon);
 Vue.use(Progress);
+Vue.use(Switch);
 Vue.use(vuescroll);
 Vue.use(VueAxios, axios);
 

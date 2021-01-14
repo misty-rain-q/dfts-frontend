@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="node">
+      <span>成为节点: </span><a-switch @change="toBeANode" />
+    </div>
     <img class="logo" src="../assets/pageLogo.png" alt="">
     <br/>
     <br/>
@@ -20,6 +23,11 @@ export default {
   components: {
     DownloadButton,
     UploadButton,
+  },
+  methods: {
+    toBeANode() {
+
+    },
   },
 };
 </script>

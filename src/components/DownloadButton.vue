@@ -22,6 +22,7 @@
 
 <script>
 import Vue from 'vue';
+import downloadjs from 'downloadjs';
 import DownloadWindow from '../views/DownloadWindow.vue';
 
 export default {
@@ -167,7 +168,9 @@ export default {
             const element = document.createElement('a');
             element.href = file.address;
             element.download = file.name;
-            element.click();
+            const type = file.address.match(/^data:(.*);/)[1];
+            // element.click();
+            downloadjs(file.address, file.name, type);
             this.$message.success('正在下载!');
           }
         });

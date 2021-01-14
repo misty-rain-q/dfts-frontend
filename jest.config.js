@@ -9,4 +9,12 @@ module.exports = {
     '!**/vendor/**',
     '!**/dist/**',
   ],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!vue-pdf/|vue-resize-sensor/)',
+  ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'identity-obj-proxy',
+    '\\.worker.js': '<rootDir>/tests/__mocks__/workerMock.js',
+  },
 };

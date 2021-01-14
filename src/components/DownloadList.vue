@@ -32,7 +32,6 @@
 <script>
 import Vue from 'vue';
 import pdf from 'vue-pdf';
-import img from '../assets/temple2.jpg';
 
 const columns = [
   {
@@ -54,7 +53,7 @@ export default {
   data() {
     return {
       numPages: 20,
-      photo_content: img,
+      photo_content: '../assets/temple2.jpg',
       pdf_content: '',
       selectedItemKeys: [],
       data: [],
@@ -167,10 +166,6 @@ export default {
 </script>
 
 <style>
-.downlist {
-
-}
-
 .ant-table {
   overflow: auto;
   max-height: 300px;

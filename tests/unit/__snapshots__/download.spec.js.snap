@@ -57,7 +57,7 @@ exports[`DownloadWindow.vue matches snapshot 1`] = `
   <div class="fileInfo info">
     <p>剩余下载时间：</p>
     <p>剩余下载次数：</p>
-    <p>上传时间：</p>
+    <p>文件上传时间：</p>
   </div>
 </div>
 </div>

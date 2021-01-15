@@ -182,6 +182,7 @@ export default {
               tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
                 .get(fileUid)
                 .on((obj) => console.log('file', obj));
+              this.fileList = [];
             });
           }
 
@@ -202,8 +203,7 @@ export default {
               window.storage.currentFile.fileLink,
             );
           }
-        }// 上传
-        this.fileList = [];
+        }
       }
     },
   },

@@ -8,7 +8,7 @@
 
         <br>
         <div>
-          <span>有效日期：&nbsp;&nbsp;</span>
+          <span>有&nbsp;效&nbsp;日&nbsp;期：&nbsp;&nbsp;</span>
           <a-select class="date" default-value="forever"
             style="width: 120px"
             @change="handleChange"

@@ -21,11 +21,11 @@
         :options="playerOptions"
         v-show="video_visible">
       </video-player>
-      <viewer v-show="photo_visible">
-        <img id="imgshow" :src= "photo_content"/>
-      </viewer>
       <pdf v-for="i in numPages" :key="i"  :page="i" :src= "pdf_content" v-show="pdf_visible"></pdf>
     </a-drawer>
+    <viewer v-show="photo_visible" :images= "photo_content" ref="viewer" @inited=" inited">
+      <img :src ="photo1" class = "photo"/>
+    </viewer>
   </div>
 </template>
 
@@ -53,7 +53,8 @@ export default {
   data() {
     return {
       numPages: 2,
-      photo_content: '../assets/temple2.jpg',
+      photo_content: ['../assets/temple2.jpg'],
+      photo1: '../assets/temple2.jpg',
       pdf_content: '',
       selectedItemKeys: [],
       data: [],
@@ -108,6 +109,9 @@ export default {
   },
 
   methods: {
+    inited(viewer) {
+      this.viewer = viewer;
+    },
     preview(address) {
       // 初始化
       this.photo_visible = false;
@@ -123,11 +127,10 @@ export default {
         this.playerOptions.sources[0].src = address;
         this.playerOptions.sources[0].type = str;
       } else if (judge === 'image') {
-        this.visible = true;
         this.photo_visible = true;
-        this.photo_content = address;
-        // const img = document.getElementById('imgshow');
-        // img.click();
+        this.photo_content = [address];
+        this.photo1 = address;
+        this.viewer.show();
       } else if (judge === 'application') {
         if (str === 'application/pdf') {
           this.$options.methods.getNumPages(address).then((numPages) => {
@@ -169,6 +172,9 @@ export default {
 </script>
 
 <style>
+.photo {
+  display: none;
+}
 .ant-table {
   overflow: auto;
   max-height: 300px;

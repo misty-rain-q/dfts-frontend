@@ -206,6 +206,14 @@ export default {
       Vue.eventBus.$emit('download-file-list-changed', this.fileList);
       console.log('fuck');
     });
+    Vue.eventBus.$on('file-info-needed', () => {
+      Vue.eventBus.$emit('file-info-satisfied', {
+        remaining_num: this.downnum,
+        remaining_time: this.datelist,
+        upload_time: this.uploadtime,
+        down_set: this.downset,
+      });
+    });
     const params = new URLSearchParams(window.location.search.slice(1));
     const transferId = params.get('fileId');
     if (transferId) {
@@ -214,7 +222,18 @@ export default {
       this.turnToDownloadPage();
     }
   },
-
+  watch: {
+    visible(val) {
+      if (val) {
+        Vue.eventBus.$emit('file-info-satisfied', {
+          remaining_num: this.downnum,
+          remaining_time: this.datelist,
+          upload_time: this.uploadtime,
+          down_set: this.downset,
+        });
+      }
+    },
+  },
 };
 </script>
 

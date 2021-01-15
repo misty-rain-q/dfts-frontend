@@ -51,6 +51,7 @@ exports[`DownloadWindow.vue matches snapshot 1`] = `
 </div>
 </div>
 <!---->
+<div style="display: none;"><img src="../assets/temple2.jpg" class="photo"></div>
 </div>
 </div>
 <div class="right"><img src="../assets/uploadLogo.jpg" alt="" class="logo">

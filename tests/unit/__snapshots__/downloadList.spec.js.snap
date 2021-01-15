@@ -49,5 +49,6 @@ exports[`DownloadList.vue matches snapshot 1`] = `
 </div>
 </div>
 <!---->
+<div style="display: none;"><img src="../assets/temple2.jpg" class="photo"></div>
 </div>
 `;

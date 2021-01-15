@@ -123,11 +123,12 @@ export default {
                   this.downnum -= 1;
                   this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('downloadTime')
                     .put(this.downnum);
+                  if (this.downnum <= 0) {
+                    this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
+                    console.log('节点已失效');
+                  }
                 }
-                if (this.downnum <= 0) {
-                  this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
-                  console.log('节点已失效');
-                }
+
                 this.fileSet();
               }
             } else {
@@ -170,10 +171,12 @@ export default {
       }
       const callbackEventName = `checked-file-list-satisfied-${Date.now()}`;
       console.log(callbackEventName);
+      let downloaded = 0;
       Vue.eventBus.$on(callbackEventName, (keys) => {
         console.log('downloading', keys);
         this.fileList.forEach((file) => {
           console.log('file key', file.key);
+
           if (keys.includes(file.key)) {
             console.log('downloading');
             const element = document.createElement('a');
@@ -183,9 +186,14 @@ export default {
             // element.click();
             downloadjs(file.address, file.name, type);
             this.$message.success('正在下载!');
+            downloaded += 1;
           }
         });
+        if (downloaded === 0) {
+          this.$message.warn('未选中下载文件');
+        }
       });
+
       Vue.eventBus.$emit('checked-file-list-required', callbackEventName);
       console.log('download file list required');
 

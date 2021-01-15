@@ -13,6 +13,8 @@
       @changeEffectiveDate = 'changeDate'
       @changeDownloadTime = 'changeTime'
       @changeDownset = 'changeSet'
+      @changeIdentifyCode = 'changeICode'
+      @SendInputCode = 'sendInputcode'
       @file-list-changed="handleFileListChange"></upload-window>
     </a-modal>
     <a-modal ok-text="确定" cancel-text="取消" :centered="true"
@@ -45,6 +47,8 @@ export default {
       downloadTime: 1,
       downset: 'max',
       linkVisible: false,
+      iCode: '', // 验证码
+      vCode: '', // 输入的验证码
     };
   },
   watch: {
@@ -64,6 +68,12 @@ export default {
     },
     handleFileListChange(newFileList) {
       this.fileList = newFileList;
+    },
+    sendInputcode(vcode) {
+      this.vCode = vcode;
+    },
+    changeICode(identifyCode) {
+      this.iCode = identifyCode;
     },
     changeCode(code) {
       this.extractionCode = code;
@@ -127,6 +137,8 @@ export default {
     uploadToGundb() {
       if (this.fileList.length === 0) {
         this.$message.error('上传错误，文件列表为空');
+      } else if (this.vCode !== this.iCode) {
+        this.$message.error('验证码输入错误!');
       } else {
         const tempThis = this;
         const fileNum = this.fileList.length;
@@ -191,6 +203,7 @@ export default {
             );
           }
         }// 上传
+        this.fileList = [];
       }
     },
   },
@@ -199,7 +212,7 @@ export default {
 
 <style scoped>
 /deep/ .ant-modal {
-  width: 40rem !important;
+  width: 45rem !important;
 
 }
 

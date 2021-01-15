@@ -16,6 +16,8 @@
           @changeEDate = 'cgdate'
           @changeDset = 'cgds'
           @changeDTime = 'cgdt'
+          @changeIdentifyCode = 'cgic'
+          @inputCode = 'inputcode'
           @changeExtractionCode="extractionCodeChanged">
           </SetFile>
         </div>
@@ -59,6 +61,12 @@ export default {
     },
     cgdt(downnum) {
       this.$emit('changeDownloadTime', downnum);
+    },
+    cgic(identifyCode) {
+      this.$emit('changeIdentifyCode', identifyCode);
+    },
+    inputcode(vcode) {
+      this.$emit('SendInputCode', vcode);
     },
     clearData() {
       this.currentFileList = [];

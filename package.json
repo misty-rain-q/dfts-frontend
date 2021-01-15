@@ -16,6 +16,7 @@
     "gun": "^0.2020.520",
     "iclipboard": "^1.0.1",
     "pdfjs-dist": "^2.5.207",
+    "svg-captcha": "^1.4.0",
     "v-viewer": "^1.5.1",
     "video.js": "^7.10.2",
     "viewerjs": "^1.9.0",
@@ -43,6 +44,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.0",
     "lint-staged": "^9.5.0",
     "vue-template-compiler": "^2.6.11"
   },

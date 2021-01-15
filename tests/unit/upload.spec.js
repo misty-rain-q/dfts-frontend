@@ -32,6 +32,6 @@ describe('UploadWindow.vue', () => {
   it('has inputs', () => {
     const inputs = wrapper.findAll('input');
     console.log(inputs.length);
-    expect(inputs.length).toBe(4);
+    expect(inputs.length).toBe(5);
   });
 });

@@ -42,7 +42,7 @@ export default {
       fileList: [],
       extractionCode: '',
       effectiveDate: 'day',
-      downloadTime: 0,
+      downloadTime: 1,
       downset: 'max',
       linkVisible: false,
     };
@@ -133,60 +133,64 @@ export default {
         const uid = this.uuid(8, 16);
         window.gun = tempThis.$gun;
         const nowtime = new Date().toISOString();// 获取当前时间（0时区）
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
-          .put(fileNum);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
-          .put(this.extractionCode);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('effectiveDate')
-          .put(this.effectiveDate);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downloadTime')
-          .put(this.downloadTime);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
-          .put(this.downset);
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('uploadtime')
-          .put(nowtime);
+        if (this.downloadTime === null) {
+          this.$message.error('有效日期格式错误!');
+        } else {
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('total')
+            .put(fileNum);
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('extractionCode')
+            .put(this.extractionCode);
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('effectiveDate')
+            .put(this.effectiveDate);
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downloadTime')
+            .put(this.downloadTime);
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('downset')
+            .put(this.downset);
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('uploadtime')
+            .put(nowtime);
 
-        console.log('original data', {
-          extractionCode: this.extractionCode,
-          downloadTime: this.downloadTime,
-          effectiveDate: this.effectiveDate,
-          downset: this.downset,
-        });
+          // console.log('original data', {
+          //   extractionCode: this.extractionCode,
+          //   downloadTime: this.downloadTime,
+          //   effectiveDate: this.effectiveDate,
+          //   downset: this.downset,
+          // });
 
-        for (let i = 0; i < fileNum; i += 1) {
-          const fileUid = this.uuid(8, 16);
-          // tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-          //   .put(fileUid);
-          this.getBase64(this.fileList[i].originFileObj).then((str) => {
-            tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-              .get(fileUid)
-              .put({
-                content: str,
-                filename: this.fileList[i].name,
-              });
-            tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
-              .get(fileUid)
-              .on((obj) => console.log('file', obj));
+          for (let i = 0; i < fileNum; i += 1) {
+            const fileUid = this.uuid(8, 16);
+            // tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+            //   .put(fileUid);
+            this.getBase64(this.fileList[i].originFileObj).then((str) => {
+              tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+                .get(fileUid)
+                .put({
+                  content: str,
+                  filename: this.fileList[i].name,
+                });
+              tempThis.$gun.get('gun-dfts').get('transfers').get(uid).get('files')
+                .get(fileUid)
+                .on((obj) => console.log('file', obj));
+            });
+          }
+
+          tempThis.$gun.get('gun-dfts').get('transfers').get(uid).once((data) => {
+            console.log('uploaded transfer', data);
           });
-        }
+          this.$message.success('上传成功！');
+          this.visible = !this.visible;
 
-        tempThis.$gun.get('gun-dfts').get('transfers').get(uid).once((data) => {
-          console.log('uploaded transfer', data);
-        });
-        this.$message.success('上传成功！');
-        this.visible = !this.visible;
-
-        this.linkVisible = !this.linkVisible;
-        window.storage.currentFile = {
-          fileId: uid,
-          fileLink: `${window.location.origin}/?fileId=${uid}`,
-        };
-        if (window.storage.vm && window.storage.vm.linkPage) {
-          window.storage.vm.linkPage.updateFileInformation(
-            window.storage.currentFile.fileId,
-            window.storage.currentFile.fileLink,
-          );
-        }
+          this.linkVisible = !this.linkVisible;
+          window.storage.currentFile = {
+            fileId: uid,
+            fileLink: `${window.location.origin}/?fileId=${uid}`,
+          };
+          if (window.storage.vm && window.storage.vm.linkPage) {
+            window.storage.vm.linkPage.updateFileInformation(
+              window.storage.currentFile.fileId,
+              window.storage.currentFile.fileLink,
+            );
+          }
+        }// 上传
       }
     },
   },

@@ -13,7 +13,7 @@
       &nbsp;
     </a-modal>
     <a-modal ok-text="下载"  cancel-text="取消"
-     :maskClosable= "false" v-model="visible" title="下载" @ok="download">
+     :maskClosable= "false" v-model="visible" title="下载"  @ok="download">
       <download-window></download-window>
     </a-modal>
 
@@ -35,7 +35,7 @@ export default {
       isCorrect: false,
       visible: false,
       passwordInputVisible: false,
-      fid: '', // 测试
+
       password: '',
       extraction: '',
       inputValue: '',
@@ -118,6 +118,16 @@ export default {
                 this.passwordInputVisible = true;
               } else {
                 this.visible = true;
+                if (this.downset === 'number') {
+                  console.log(`下载次数为:${this.downnum}`);
+                  this.downnum -= 1;
+                  this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('downloadTime')
+                    .put(this.downnum);
+                }
+                if (this.downnum <= 0) {
+                  this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
+                  console.log('节点已失效');
+                }
                 this.fileSet();
               }
             } else {
@@ -129,6 +139,7 @@ export default {
     getTypeFromMime(mimeType) {
       return mimeType && null;
     },
+
     download() {
       if (this.datelist !== 'forever') {
         const expireDate = new Date();
@@ -177,19 +188,6 @@ export default {
       });
       Vue.eventBus.$emit('checked-file-list-required', callbackEventName);
       console.log('download file list required');
-      if (this.downset === 'number') {
-        if (this.downnum > 1) {
-          this.downnum -= 1;
-          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).get('effectiveDate')
-            .put(this.downnum - 1);
-          console.log('下载次数已经减一');
-        } else {
-          this.$gun.get('gun-dfts').get('transfers').get(this.inputValue).put(null);
-          this.visible = false;
-          this.$message.error('文件下载次数为0');
-          console.log('节点已删除');
-        }
-      }
 
       // this.visible = false;
     },

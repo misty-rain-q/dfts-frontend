@@ -9,6 +9,7 @@ import CheckBox from 'ant-design-vue/lib/checkbox';
 import Upload from 'ant-design-vue/lib/upload';
 import Select from 'ant-design-vue/lib/select';
 import InputNumber from 'ant-design-vue/lib/input-number';
+import Switch from 'ant-design-vue/lib/switch';
 
 // Vue.use(ant);
 Vue.use(VueQr);
@@ -19,6 +20,7 @@ Vue.use(CheckBox);
 Vue.use(Upload);
 Vue.use(Select);
 Vue.use(InputNumber);
+Vue.use(Switch);
 
 const wrapper = mount(Home);
 
@@ -31,9 +33,9 @@ describe('Home.vue', () => {
     expect(imgs.length).toBe(1);
   });
 
-  it('has two button', () => {
+  it('has three buttons (including a switch)', () => {
     const buttons = wrapper.findAll('button');
-    expect(buttons.length).toBe(2);
+    expect(buttons.length).toBe(3);
   });
 
   it('has a input', () => {

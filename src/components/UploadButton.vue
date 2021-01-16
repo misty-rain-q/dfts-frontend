@@ -137,7 +137,7 @@ export default {
     uploadToGundb() {
       if (this.fileList.length === 0) {
         this.$message.error('上传错误，文件列表为空');
-      } else if (this.vCode !== this.iCode) {
+      } else if (this.vCode.toLowerCase() !== this.iCode.toLowerCase()) {
         this.$message.error('验证码输入错误!');
       } else {
         const tempThis = this;

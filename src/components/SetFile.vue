@@ -157,7 +157,7 @@ export default {
     createdCode() {
       const len = 4;
       const codeList = [];
-      const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789';
+      const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz23456789';
       const charsLen = chars.length;
       for (let i = 0; i < len; i += 1) {
         codeList.push(chars.charAt(Math.floor(Math.random() * charsLen)));
@@ -314,7 +314,8 @@ export default {
 }
 
 .verifyP {
-  font-size: 16px;
+  line-height: 20px;
+  width: 88px;
 }
 
 </style>

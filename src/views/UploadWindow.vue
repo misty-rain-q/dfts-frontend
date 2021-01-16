@@ -43,7 +43,8 @@ export default {
   },
   methods: {
     fileListChanged(val) {
-      this.currentFileList = this.currentFileList.concat(val);
+      this.currentFileList = val;
+      // this.currentFileList = this.currentFileList.concat(val);
       this.$emit('file-list-changed', this.currentFileList);
     },
     extractionCodeChanged(val) {

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div class="node">
-      <span>成为节点: </span><a-switch @change="toBeANode" />
+    <div class="node" v-show="false">
+      <span>后端节点控制：</span><a-switch @change="changeBackendState" />
     </div>
     <img class="logo" src="../assets/pageLogo.png" alt="">
     <br/>
@@ -25,9 +25,21 @@ export default {
     UploadButton,
   },
   methods: {
-    toBeANode() {
-
+    changeBackendState(newValue) {
+      if (newValue) {
+        window.location.href = 'dfts://';
+        console.log('Attempted to launch helper client');
+        this.$message.info('如果客户端未能自动启动，请手动安装启动客户端并刷新页面', 10);
+      } else {
+        this.$message.error('目前暂不支持通过前端关闭客户端；请手动操作');
+        // TODO Revert the state to on
+      }
     },
+  },
+  data() {
+    return {
+      backendUp: true,
+    };
   },
 };
 </script>
@@ -42,5 +54,10 @@ export default {
   margin-top: 100px;
   width: 25%;
   min-width: 200px;
+}
+.node {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }
 </style>

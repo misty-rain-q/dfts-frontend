@@ -100,7 +100,7 @@ new Vue({
     async detectBackendBaseUrl() {
       const candidates = [
         window.location.origin,
-        `${window.location.protocol}//${window.location.hostname}:7001`,
+        `${window.location.protocol}//${window.location.hostname}:10032`,
       ];
       let result = null;
       for (let i = 0; i < candidates.length; i += 1) {

@@ -51,11 +51,13 @@
 
         <br>
         <div class="verificationArea">
-        <p class="verifyP">验证码：</p><a-input class = "vecode" v-model="vcode" />
-        <div class="s-canvas" @click="createdCode">
-          <canvas ref="captchaCanvas" :width="contentWidth" :height="contentHeight"></canvas>
-        </div>
-
+          <p class="verifyP">验证码：</p>
+          <div>
+            <a-input class = "vecode" v-model="vcode" />
+          </div>
+          <div class="s-canvas" @click="createdCode">
+            <canvas ref="captchaCanvas" :width="contentWidth" :height="contentHeight"></canvas>
+          </div>
         </div>
 
     </div>
@@ -110,7 +112,7 @@ export default {
     },
     contentWidth: {
       type: Number,
-      default: 120,
+      default: 90,
     },
     contentHeight: {
       type: Number,
@@ -306,16 +308,19 @@ export default {
 }
 
 .vecode{
-  width: 80px;
+  min-width: 60px;
+  max-width: 100px;
 }
 
 .verificationArea {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 80px));
 }
 
 .verifyP {
   line-height: 20px;
-  width: 88px;
+  max-width: 88px;
+  min-width: 50px;
 }
 
 </style>
